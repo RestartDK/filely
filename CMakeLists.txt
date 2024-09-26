@@ -8,9 +8,13 @@ project(file_converter)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Make sure CMAKE makes a compile_commands file so that compiler recognises custom classes
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Add executable target which will be main.cpp
 add_executable(file_converter
     src/main.cpp
+    src/cli.cpp
     src/filereader.cpp
     src/filewriter.cpp
     src/fileformat.cpp
