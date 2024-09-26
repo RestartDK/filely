@@ -33,3 +33,7 @@
 *.app
 
 .idea/
+build/
+cmake-build-debug/
+
+test.jpg
