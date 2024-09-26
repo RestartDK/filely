@@ -37,6 +37,14 @@ CLIOptions parseArguments(int argc, char* argv[]) {
                 options.showHelp = true;
                 return options;
             }
+        } else if (arg == "-p") {
+            if (i + 1 < argc) {
+                options.outputPath = argv[++i];
+            } else {
+                cerr << "Error: No output path specified after '-p'.\n";
+                options.showHelp = true;
+                return options;
+            }
         } else if (arg[0] != '-') {
             options.inputFile = arg;
         } else {
@@ -64,8 +72,9 @@ CLIOptions parseArguments(int argc, char* argv[]) {
 }
 
 void displayHelp() {
-    cout << "Usage: fc <input_file> -t <output_format>\n"
+    cout << "Usage: fc <input_file> -t <output_format> -p <output_path>\n"
               << "Options:\n"
               << "  -t <format>     Specify the output format (png, jpg, jpeg, csv, json)\n"
+              << "  -p <path>       Specify the output path\n"
               << "  -h, --help      Display this help message\n";
 }

@@ -6,9 +6,10 @@
 using namespace std;
 
 struct CLIOptions {
-    string inputFile;
-    string outputFormat;
     bool showHelp = false;
+    std::string inputFile;
+    std::string outputFormat;
+    std::string outputPath;
 };
 
 CLIOptions parseArguments(int argc, char* argv[]);
