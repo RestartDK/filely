@@ -14,7 +14,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
         return options;
     }
 
-    static const vector<string> validFormats = {"png", "jpg", "jpeg"};
+    static const vector<string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
 
     for (int i = 1; i < argc; ++i) {
         string arg = argv[i];
@@ -28,7 +28,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
                                options.outputFormat.begin(), ::tolower);
                 if (find(validFormats.begin(), validFormats.end(), options.outputFormat) == validFormats.end()) {
                     cerr << "Error: Unsupported output format '" << options.outputFormat << "'.\n";
-                    cerr << "Supported formats are: png, jpg, jpeg.\n";
+                    cerr << "Supported formats are: png, jpg, jpeg, csv, json.\n";
                     options.showHelp = true;
                     return options;
                 }
@@ -66,6 +66,6 @@ CLIOptions parseArguments(int argc, char* argv[]) {
 void displayHelp() {
     cout << "Usage: fc <input_file> -t <output_format>\n"
               << "Options:\n"
-              << "  -t <format>     Specify the output format (png, jpg, jpeg)\n"
+              << "  -t <format>     Specify the output format (png, jpg, jpeg, csv, json)\n"
               << "  -h, --help      Display this help message\n";
 }
