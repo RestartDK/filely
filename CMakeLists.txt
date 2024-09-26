@@ -19,6 +19,8 @@ add_executable(file_converter
     src/formatters/pngformat.cpp
     src/formatters/csvformat.cpp
     src/formatters/xslxformat.cpp
+        src/cli.cpp
+        include/cli.h
 )
 
 # Specify where to look for header files (include directories)
