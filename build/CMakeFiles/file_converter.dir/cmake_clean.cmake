@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/file_converter.dir/src/cli.cpp.o"
+  "CMakeFiles/file_converter.dir/src/cli.cpp.o.d"
   "CMakeFiles/file_converter.dir/src/fileformat.cpp.o"
   "CMakeFiles/file_converter.dir/src/fileformat.cpp.o.d"
   "CMakeFiles/file_converter.dir/src/filereader.cpp.o"

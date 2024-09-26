@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/cli.cpp" "CMakeFiles/file_converter.dir/src/cli.cpp.o" "gcc" "CMakeFiles/file_converter.dir/src/cli.cpp.o.d"
   "/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/fileformat.cpp" "CMakeFiles/file_converter.dir/src/fileformat.cpp.o" "gcc" "CMakeFiles/file_converter.dir/src/fileformat.cpp.o.d"
   "/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filereader.cpp" "CMakeFiles/file_converter.dir/src/filereader.cpp.o" "gcc" "CMakeFiles/file_converter.dir/src/filereader.cpp.o.d"
   "/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filewriter.cpp" "CMakeFiles/file_converter.dir/src/filewriter.cpp.o" "gcc" "CMakeFiles/file_converter.dir/src/filewriter.cpp.o.d"

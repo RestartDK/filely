@@ -129,6 +129,30 @@ file_converter/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/build
 .PHONY : file_converter/fast
 
+src/cli.o: src/cli.cpp.o
+.PHONY : src/cli.o
+
+# target to build an object file
+src/cli.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/cli.cpp.o
+.PHONY : src/cli.cpp.o
+
+src/cli.i: src/cli.cpp.i
+.PHONY : src/cli.i
+
+# target to preprocess a source file
+src/cli.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/cli.cpp.i
+.PHONY : src/cli.cpp.i
+
+src/cli.s: src/cli.cpp.s
+.PHONY : src/cli.s
+
+# target to generate assembly for a file
+src/cli.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/cli.cpp.s
+.PHONY : src/cli.cpp.s
+
 src/fileformat.o: src/fileformat.cpp.o
 .PHONY : src/fileformat.o
 
@@ -354,6 +378,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... file_converter"
+	@echo "... src/cli.o"
+	@echo "... src/cli.i"
+	@echo "... src/cli.s"
 	@echo "... src/fileformat.o"
 	@echo "... src/fileformat.i"
 	@echo "... src/fileformat.s"
