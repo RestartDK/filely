@@ -18,7 +18,7 @@ add_executable(file_converter
     src/formatters/jpgformat.cpp
     src/formatters/pngformat.cpp
     src/formatters/csvformat.cpp
-    src/formatters/xslxformat.cpp
+    src/formatters/jsonformat.cpp
 )
 
 # Specify where to look for header files (include directories)
