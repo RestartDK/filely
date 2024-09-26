@@ -12,4 +12,4 @@ struct CLIOptions {
 CLIOptions parseArguments(int argc, char* argv[]);
 void displayHelp();
 
-#endif // CLI_H
+#endif 
