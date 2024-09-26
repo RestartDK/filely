@@ -7,6 +7,7 @@ project(file_converter)
 # Set the newest version c++ for the project to be built for
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Add executable target which will be main.cpp
 add_executable(file_converter
