@@ -3,13 +3,15 @@
 
 #include <string>
 
+using namespace std;
+
 struct CLIOptions {
-    std::string inputFile;
-    std::string outputFormat;
+    string inputFile;
+    string outputFormat;
     bool showHelp = false;
 };
 
 CLIOptions parseArguments(int argc, char* argv[]);
 void displayHelp();
 
-#endif // CLI_H
+#endif
