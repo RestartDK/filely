@@ -7,6 +7,7 @@ project(file_converter)
 # Set the newest version c++ for the project to be built for
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Make sure CMAKE makes a compile_commands file so that compiler recognises custom classes
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

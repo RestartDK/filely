@@ -43,13 +43,14 @@ FileFormat *getFileFormat(string path) {
 int main(int argc, char *argv[]) {
   CLIOptions options = parseArguments(argc, argv);
 
-  if (options.showHelp) {
-    displayHelp();
-    return options.inputFile.empty() ? 1 : 0;
-  }
+    if (options.showHelp) {
+        displayHelp();
+        return options.inputFile.empty() ? 1 : 0;
+    }
 
-  cout << "Input File: " << options.inputFile << "\n";
-  cout << "Output Format: " << options.outputFormat << "\n";
+    cout << "Input File: " << options.inputFile << "\n";
+    cout << "Output Format: " << options.outputFormat << "\n";
+    cout << "Output Path: " << options.outputPath << "\n";
 
   try {
     FileFormat *inputFormat = getFileFormat(options.inputFile);
@@ -62,7 +63,6 @@ int main(int argc, char *argv[]) {
     cerr << "Error during conversion: " << e.what() << "\n";
     return 1;
   }
-
-  cout << "Conversion completed successfully.\n";
-  return 0;
+    cout << "Conversion completed successfully.\n";
+    return 0;
 }
