@@ -1,14 +1,14 @@
-#ifndef JPEGFORMAT_H
-#define JPEGFORMAT_H
+#ifndef JSONFORMAT_H
+#define JSONFORMAT_H
 
 #include "fileformat.h"
 #include <fstream>
 #include <string>
 
-class JPEGFormat : public FileFormat {
+class JSONFormat : public FileFormat {
 public:
   // Destructor
-  ~JPEGFormat() override;
+  ~JSONFormat() override;
 
   std::string parse(const std::ifstream &file) const override;
 

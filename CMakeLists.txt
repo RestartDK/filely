@@ -9,19 +9,19 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Make sure CMAKE makes a compile_commands file so that compiler recognises custom classes
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Add executable target which will be main.cpp
 add_executable(file_converter
     src/main.cpp
-    src/filereader.cpp
-    src/filewriter.cpp
-    src/fileformat.cpp
+    src/converter.cpp
+    src/cli.cpp
     src/formatters/jpegformat.cpp
     src/formatters/jpgformat.cpp
     src/formatters/pngformat.cpp
     src/formatters/csvformat.cpp
-    src/formatters/xslxformat.cpp
-        src/cli.cpp
-        include/cli.h
+    src/formatters/jsonformat.cpp
 )
 
 # Specify where to look for header files (include directories)

@@ -27,6 +27,9 @@
 *.a
 *.lib
 
+# Cache
+.cache
+
 # Executables
 *.exe
 *.out
@@ -34,8 +37,5 @@
 
 .idea/
 /build/*
-!/build/
-
+!/build/  
 cmake-build-debug/
-
-test.jpg

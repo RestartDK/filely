@@ -1,17 +1,17 @@
-#include "formatters/jpgformat.h"
+#include "formatters/jsonformat.h"
 #include <fstream>
 #include <sstream>
 using namespace std;
 
-JPGFormat::~JPGFormat() = default;
+JSONFormat::~JSONFormat() = default;
 
-string JPGFormat::parse(const ifstream &file) const {
+string JSONFormat::parse(const ifstream &file) const {
   stringstream buffer;
   buffer << file.rdbuf();
   return buffer.str();
 }
 
-string JPGFormat::format(const string data) const {
+string JSONFormat::format(const string data) const {
   // Process data here
   return "Formatted data: " + data;
 }
