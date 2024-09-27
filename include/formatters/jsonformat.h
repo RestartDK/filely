@@ -1,18 +1,19 @@
-#ifndef FILEFORMAT_H
-#define FILEFORMAT_H
+#ifndef JSONFORMAT_H
+#define JSONFORMAT_H
 
+#include "fileformat.h"
 #include <fstream>
 #include <string>
 
-class FileFormat {
+class JSONFormat : public FileFormat {
 public:
-    virtual ~FileFormat() {}
+  // Destructor
+  ~JSONFormat() override;
 
-    // Parses data from input file and returns structured data as a string
-    virtual std::string parse(std::ifstream& inputFile) const = 0;
+  std::string parse(const std::ifstream &file) const override;
 
-    // Formats structured data from string and writes to output file
-    virtual void format(const std::string& data, std::ofstream& outputFil) const = 0;
+  std::string format(const std::ofstream &file,
+                     const std::string data) const override;
 };
 
-#endif // FILEFORMAT_H
+#endif
