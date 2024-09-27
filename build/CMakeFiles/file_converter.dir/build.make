@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter
+CMAKE_SOURCE_DIR = /Users/paulruiz/Documents/GitHub/file-converter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build
+CMAKE_BINARY_DIR = /Users/paulruiz/Documents/GitHub/file-converter/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/file_converter.dir/depend.make
@@ -70,144 +70,144 @@ include CMakeFiles/file_converter.dir/progress.make
 include CMakeFiles/file_converter.dir/flags.make
 
 CMakeFiles/file_converter.dir/src/main.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/main.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/main.cpp
+CMakeFiles/file_converter.dir/src/main.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/main.cpp
 CMakeFiles/file_converter.dir/src/main.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/file_converter.dir/src/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/main.cpp.o -MF CMakeFiles/file_converter.dir/src/main.cpp.o.d -o CMakeFiles/file_converter.dir/src/main.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/file_converter.dir/src/main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/main.cpp.o -MF CMakeFiles/file_converter.dir/src/main.cpp.o.d -o CMakeFiles/file_converter.dir/src/main.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/main.cpp
 
 CMakeFiles/file_converter.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/main.cpp > CMakeFiles/file_converter.dir/src/main.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/main.cpp > CMakeFiles/file_converter.dir/src/main.cpp.i
 
 CMakeFiles/file_converter.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/main.cpp -o CMakeFiles/file_converter.dir/src/main.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/main.cpp -o CMakeFiles/file_converter.dir/src/main.cpp.s
 
 CMakeFiles/file_converter.dir/src/cli.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/cli.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/cli.cpp
+CMakeFiles/file_converter.dir/src/cli.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/cli.cpp
 CMakeFiles/file_converter.dir/src/cli.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/file_converter.dir/src/cli.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/cli.cpp.o -MF CMakeFiles/file_converter.dir/src/cli.cpp.o.d -o CMakeFiles/file_converter.dir/src/cli.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/cli.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/file_converter.dir/src/cli.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/cli.cpp.o -MF CMakeFiles/file_converter.dir/src/cli.cpp.o.d -o CMakeFiles/file_converter.dir/src/cli.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/cli.cpp
 
 CMakeFiles/file_converter.dir/src/cli.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/cli.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/cli.cpp > CMakeFiles/file_converter.dir/src/cli.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/cli.cpp > CMakeFiles/file_converter.dir/src/cli.cpp.i
 
 CMakeFiles/file_converter.dir/src/cli.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/cli.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/cli.cpp -o CMakeFiles/file_converter.dir/src/cli.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/cli.cpp -o CMakeFiles/file_converter.dir/src/cli.cpp.s
 
 CMakeFiles/file_converter.dir/src/filereader.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/filereader.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filereader.cpp
+CMakeFiles/file_converter.dir/src/filereader.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/filereader.cpp
 CMakeFiles/file_converter.dir/src/filereader.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/file_converter.dir/src/filereader.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/filereader.cpp.o -MF CMakeFiles/file_converter.dir/src/filereader.cpp.o.d -o CMakeFiles/file_converter.dir/src/filereader.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filereader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/file_converter.dir/src/filereader.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/filereader.cpp.o -MF CMakeFiles/file_converter.dir/src/filereader.cpp.o.d -o CMakeFiles/file_converter.dir/src/filereader.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/filereader.cpp
 
 CMakeFiles/file_converter.dir/src/filereader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/filereader.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filereader.cpp > CMakeFiles/file_converter.dir/src/filereader.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/filereader.cpp > CMakeFiles/file_converter.dir/src/filereader.cpp.i
 
 CMakeFiles/file_converter.dir/src/filereader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/filereader.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filereader.cpp -o CMakeFiles/file_converter.dir/src/filereader.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/filereader.cpp -o CMakeFiles/file_converter.dir/src/filereader.cpp.s
 
 CMakeFiles/file_converter.dir/src/filewriter.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/filewriter.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filewriter.cpp
+CMakeFiles/file_converter.dir/src/filewriter.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/filewriter.cpp
 CMakeFiles/file_converter.dir/src/filewriter.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/file_converter.dir/src/filewriter.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/filewriter.cpp.o -MF CMakeFiles/file_converter.dir/src/filewriter.cpp.o.d -o CMakeFiles/file_converter.dir/src/filewriter.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filewriter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/file_converter.dir/src/filewriter.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/filewriter.cpp.o -MF CMakeFiles/file_converter.dir/src/filewriter.cpp.o.d -o CMakeFiles/file_converter.dir/src/filewriter.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/filewriter.cpp
 
 CMakeFiles/file_converter.dir/src/filewriter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/filewriter.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filewriter.cpp > CMakeFiles/file_converter.dir/src/filewriter.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/filewriter.cpp > CMakeFiles/file_converter.dir/src/filewriter.cpp.i
 
 CMakeFiles/file_converter.dir/src/filewriter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/filewriter.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/filewriter.cpp -o CMakeFiles/file_converter.dir/src/filewriter.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/filewriter.cpp -o CMakeFiles/file_converter.dir/src/filewriter.cpp.s
 
 CMakeFiles/file_converter.dir/src/fileformat.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/fileformat.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/fileformat.cpp
+CMakeFiles/file_converter.dir/src/fileformat.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/fileformat.cpp
 CMakeFiles/file_converter.dir/src/fileformat.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/file_converter.dir/src/fileformat.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/fileformat.cpp.o -MF CMakeFiles/file_converter.dir/src/fileformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/fileformat.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/fileformat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/file_converter.dir/src/fileformat.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/fileformat.cpp.o -MF CMakeFiles/file_converter.dir/src/fileformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/fileformat.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/fileformat.cpp
 
 CMakeFiles/file_converter.dir/src/fileformat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/fileformat.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/fileformat.cpp > CMakeFiles/file_converter.dir/src/fileformat.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/fileformat.cpp > CMakeFiles/file_converter.dir/src/fileformat.cpp.i
 
 CMakeFiles/file_converter.dir/src/fileformat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/fileformat.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/fileformat.cpp -o CMakeFiles/file_converter.dir/src/fileformat.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/fileformat.cpp -o CMakeFiles/file_converter.dir/src/fileformat.cpp.s
 
 CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpegformat.cpp
+CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpegformat.cpp
 CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpegformat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpegformat.cpp
 
 CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpegformat.cpp > CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpegformat.cpp > CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.i
 
 CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpegformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpegformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/jpegformat.cpp.s
 
 CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpgformat.cpp
+CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpgformat.cpp
 CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpgformat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpgformat.cpp
 
 CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpgformat.cpp > CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpgformat.cpp > CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.i
 
 CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jpgformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jpgformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/jpgformat.cpp.s
 
 CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/pngformat.cpp
+CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/pngformat.cpp
 CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/pngformat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/pngformat.cpp
 
 CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/pngformat.cpp > CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/pngformat.cpp > CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.i
 
 CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/pngformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/pngformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/pngformat.cpp.s
 
 CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/csvformat.cpp
+CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/csvformat.cpp
 CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/csvformat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/csvformat.cpp
 
 CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/csvformat.cpp > CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/csvformat.cpp > CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.i
 
 CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/csvformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/csvformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.s
 
 CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o: CMakeFiles/file_converter.dir/flags.make
-CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o: /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jsonformat.cpp
+CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o: /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jsonformat.cpp
 CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o: CMakeFiles/file_converter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o -c /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jsonformat.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o -MF CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o.d -o CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o -c /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jsonformat.cpp
 
 CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jsonformat.cpp > CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jsonformat.cpp > CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.i
 
 CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/src/formatters/jsonformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/paulruiz/Documents/GitHub/file-converter/src/formatters/jsonformat.cpp -o CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.s
 
 # Object files for target file_converter
 file_converter_OBJECTS = \
@@ -237,7 +237,7 @@ file_converter: CMakeFiles/file_converter.dir/src/formatters/csvformat.cpp.o
 file_converter: CMakeFiles/file_converter.dir/src/formatters/jsonformat.cpp.o
 file_converter: CMakeFiles/file_converter.dir/build.make
 file_converter: CMakeFiles/file_converter.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable file_converter"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable file_converter"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/file_converter.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -249,6 +249,6 @@ CMakeFiles/file_converter.dir/clean:
 .PHONY : CMakeFiles/file_converter.dir/clean
 
 CMakeFiles/file_converter.dir/depend:
-	cd /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build /Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles/file_converter.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/paulruiz/Documents/GitHub/file-converter/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/paulruiz/Documents/GitHub/file-converter /Users/paulruiz/Documents/GitHub/file-converter /Users/paulruiz/Documents/GitHub/file-converter/build /Users/paulruiz/Documents/GitHub/file-converter/build /Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles/file_converter.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/file_converter.dir/depend
 

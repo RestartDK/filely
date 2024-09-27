@@ -7,13 +7,11 @@
 
 class JSONFormat : public FileFormat {
 public:
-  // Destructor
-  ~JSONFormat() override;
+  ~JSONFormat() override {}
 
-  std::string parse(const std::ifstream &file) const override;
+  std::string parse(std::ifstream &file) const override;
 
-  std::string format(const std::ofstream &file,
-                     const std::string data) const override;
+  std::string format(std::ofstream &file, const std::string &data) const override;
 };
 
 #endif
