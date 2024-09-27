@@ -153,77 +153,29 @@ src/cli.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/cli.cpp.s
 .PHONY : src/cli.cpp.s
 
-src/fileformat.o: src/fileformat.cpp.o
-.PHONY : src/fileformat.o
+src/converter.o: src/converter.cpp.o
+.PHONY : src/converter.o
 
 # target to build an object file
-src/fileformat.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/fileformat.cpp.o
-.PHONY : src/fileformat.cpp.o
+src/converter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/converter.cpp.o
+.PHONY : src/converter.cpp.o
 
-src/fileformat.i: src/fileformat.cpp.i
-.PHONY : src/fileformat.i
-
-# target to preprocess a source file
-src/fileformat.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/fileformat.cpp.i
-.PHONY : src/fileformat.cpp.i
-
-src/fileformat.s: src/fileformat.cpp.s
-.PHONY : src/fileformat.s
-
-# target to generate assembly for a file
-src/fileformat.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/fileformat.cpp.s
-.PHONY : src/fileformat.cpp.s
-
-src/filereader.o: src/filereader.cpp.o
-.PHONY : src/filereader.o
-
-# target to build an object file
-src/filereader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/filereader.cpp.o
-.PHONY : src/filereader.cpp.o
-
-src/filereader.i: src/filereader.cpp.i
-.PHONY : src/filereader.i
+src/converter.i: src/converter.cpp.i
+.PHONY : src/converter.i
 
 # target to preprocess a source file
-src/filereader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/filereader.cpp.i
-.PHONY : src/filereader.cpp.i
+src/converter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/converter.cpp.i
+.PHONY : src/converter.cpp.i
 
-src/filereader.s: src/filereader.cpp.s
-.PHONY : src/filereader.s
-
-# target to generate assembly for a file
-src/filereader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/filereader.cpp.s
-.PHONY : src/filereader.cpp.s
-
-src/filewriter.o: src/filewriter.cpp.o
-.PHONY : src/filewriter.o
-
-# target to build an object file
-src/filewriter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/filewriter.cpp.o
-.PHONY : src/filewriter.cpp.o
-
-src/filewriter.i: src/filewriter.cpp.i
-.PHONY : src/filewriter.i
-
-# target to preprocess a source file
-src/filewriter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/filewriter.cpp.i
-.PHONY : src/filewriter.cpp.i
-
-src/filewriter.s: src/filewriter.cpp.s
-.PHONY : src/filewriter.s
+src/converter.s: src/converter.cpp.s
+.PHONY : src/converter.s
 
 # target to generate assembly for a file
-src/filewriter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/filewriter.cpp.s
-.PHONY : src/filewriter.cpp.s
+src/converter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/file_converter.dir/build.make CMakeFiles/file_converter.dir/src/converter.cpp.s
+.PHONY : src/converter.cpp.s
 
 src/formatters/csvformat.o: src/formatters/csvformat.cpp.o
 .PHONY : src/formatters/csvformat.o
@@ -381,15 +333,9 @@ help:
 	@echo "... src/cli.o"
 	@echo "... src/cli.i"
 	@echo "... src/cli.s"
-	@echo "... src/fileformat.o"
-	@echo "... src/fileformat.i"
-	@echo "... src/fileformat.s"
-	@echo "... src/filereader.o"
-	@echo "... src/filereader.i"
-	@echo "... src/filereader.s"
-	@echo "... src/filewriter.o"
-	@echo "... src/filewriter.i"
-	@echo "... src/filewriter.s"
+	@echo "... src/converter.o"
+	@echo "... src/converter.i"
+	@echo "... src/converter.s"
 	@echo "... src/formatters/csvformat.o"
 	@echo "... src/formatters/csvformat.i"
 	@echo "... src/formatters/csvformat.s"
