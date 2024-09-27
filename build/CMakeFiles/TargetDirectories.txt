@@ -1,3 +1,0 @@
-/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles/file_converter.dir
-/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles/edit_cache.dir
-/Users/danielkumlin/Desktop/University/programming-2/projects/file-converter/build/CMakeFiles/rebuild_cache.dir
