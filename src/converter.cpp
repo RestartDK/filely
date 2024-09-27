@@ -1,30 +1,25 @@
+#include "converter.h"
 #include "fileformat.h"
-#include "filereader.h"
-#include "filewriter.h"
+#include <fstream>
 #include <iostream>
 using namespace std;
 
-class Converter {
-private:
-  string inputFilePath;
-  string outputFilePath;
-  FileFormat *inputFormat;
-  FileFormat *outputFormat;
+Converter::Converter(string inputFilePath, string outputFilePath,
+                     FileFormat *inputFormat, FileFormat *outputFormat){};
 
-public:
-  Converter(string inputFilePath, string outputFilePath,
-            FileFormat *inputFormat, FileFormat *outputFormat);
-  void convert() {
-    FileReader reader(inputFilePath, inputFormat);
-    string data = reader.readFile();
+ofstream Converter::convert() {
+  // Read file parse it with a file format
+  ifstream inputFile(inputFilePath);
+  string data = inputFormat->parse(inputFile);
 
-    if (!data.empty()) {
-      cerr << "Error: No data to convert" << endl;
-    }
-
-    FileWriter writer(outputFilePath, outputFormat);
-    writer.writeFile();
-
-    cout << "Conversion completed successfully" << endl;
+  // Error checking for null data
+  if (data.empty()) {
+    cerr << "Error: No data to convert" << endl;
   }
-};
+
+  // Now format the data and write it to a new file
+  string formattedData = outputFormat->format(data);
+  ofstream file(data);
+
+  return file;
+}
