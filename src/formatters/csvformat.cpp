@@ -1,18 +1,16 @@
-#include "fileformat.h"
+#include "formatters/csvformat.h"
 #include <fstream>
 #include <sstream>
 using namespace std;
 
-class CSVFormat : FileFormat {
-public:
-  string parse(const ifstream &file) const override {
-    stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
-  }
+CSVFormat::~CSVFormat() = default;
 
-  string format(const ofstream &file, const string data) const override {
-    // Process data here
-    return "Formatted data: " + data;
-  }
+string CSVFormat::parse(const ifstream &file) const {
+  std::stringstream buffer;
+  buffer << file.rdbuf();
+  return buffer.str();
+};
+
+string CSVFormat::format(const string data) const {
+  return "Formatted data: " + data;
 };

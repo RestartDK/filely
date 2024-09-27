@@ -1,18 +1,17 @@
-#include "fileformat.h"
+#include "formatters/jsonformat.h"
 #include <fstream>
 #include <sstream>
 using namespace std;
 
-class JSONFormat : FileFormat {
-public:
-  string parse(const ifstream &file) const override {
-    stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
-  }
+JSONFormat::~JSONFormat() = default;
 
-  string format(const ofstream &file, const string data) const override {
-    // Process data here
-    return "Formatted data: " + data;
-  }
-};
+string JSONFormat::parse(const ifstream &file) const {
+  stringstream buffer;
+  buffer << file.rdbuf();
+  return buffer.str();
+}
+
+string JSONFormat::format(const string data) const {
+  // Process data here
+  return "Formatted data: " + data;
+}
