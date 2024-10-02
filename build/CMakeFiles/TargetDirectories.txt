@@ -1,3 +1,0 @@
-/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles/file_converter.dir
-/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles/edit_cache.dir
-/Users/paulruiz/Documents/GitHub/file-converter/build/CMakeFiles/rebuild_cache.dir

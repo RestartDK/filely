@@ -1,18 +1,17 @@
-#include "fileformat.h"
+#include "formatters/jpgformat.h"
 #include <fstream>
 #include <sstream>
 using namespace std;
 
-class JPGFormat : FileFormat {
-public:
-  string parse(const ifstream &file) const override {
-    stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
-  }
+JPGFormat::~JPGFormat() = default;
 
-  string format(const ofstream &file, const string data) const override {
-    // Process data here
-    return "Formatted data: " + data;
-  }
-};
+string JPGFormat::parse(const ifstream &file) const {
+  stringstream buffer;
+  buffer << file.rdbuf();
+  return buffer.str();
+}
+
+string JPGFormat::format(const string data) const {
+  // Process data here
+  return "Formatted data: " + data;
+}

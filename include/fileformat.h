@@ -12,7 +12,7 @@ public:
   virtual std::string parse(std::ifstream &file) const = 0;
 
   // Pure virtual method to format data into a file stream (output file)
-  virtual std::string format(std::ofstream &file, const std::string &data) const = 0;
+  virtual std::string format(const std::string data) const = 0;
 };
 
 #endif

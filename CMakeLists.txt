@@ -15,10 +15,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Add executable target which will be main.cpp
 add_executable(file_converter
     src/main.cpp
+    src/converter.cpp
     src/cli.cpp
-    src/filereader.cpp
-    src/filewriter.cpp
-    src/fileformat.cpp
     src/formatters/jpegformat.cpp
     src/formatters/jpgformat.cpp
     src/formatters/pngformat.cpp

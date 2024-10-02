@@ -2,6 +2,7 @@
 #define CONVERTER_H
 
 #include "fileformat.h"
+#include <fstream>
 
 class Converter {
 private:
@@ -15,7 +16,7 @@ public:
   Converter(std::string inputFilePath, std::string outputFilePath,
             FileFormat *inputFormat, FileFormat *outputFormat);
 
-  void convert();
+  std::ofstream convert();
 };
 
 #endif

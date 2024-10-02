@@ -1,11 +1,11 @@
 #include "cli.h"
 #include "converter.h"
-#include "csvformat.h"
 #include "fileformat.h"
-#include "jpegformat.h"
-#include "jpgformat.h"
-#include "jsonformat.h"
-#include "pngformat.h"
+#include "formatters/csvformat.h"
+#include "formatters/jpegformat.h"
+#include "formatters/jpgformat.h"
+#include "formatters/jsonformat.h"
+#include "formatters/pngformat.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -43,26 +43,27 @@ FileFormat *getFileFormat(string path) {
 int main(int argc, char *argv[]) {
   CLIOptions options = parseArguments(argc, argv);
 
-    if (options.showHelp) {
-        displayHelp();
-        return options.inputFile.empty() ? 1 : 0;
-    }
+  if (options.showHelp) {
+    displayHelp();
+    return options.inputFile.empty() ? 1 : 0;
+  }
 
-    cout << "Input File: " << options.inputFile << "\n";
-    cout << "Output Format: " << options.outputFormat << "\n";
-    cout << "Output Path: " << options.outputPath << "\n";
+  cout << "Input File: " << options.inputFile << "\n";
+  cout << "Output Format: " << options.outputFormat << "\n";
+  cout << "Output Path: " << options.outputPath << "\n";
 
   try {
     FileFormat *inputFormat = getFileFormat(options.inputFile);
     FileFormat *outputFormat = getFileFormat(options.outputFormat);
     Converter converter(options.inputFile, options.outputFormat, inputFormat,
                         outputFormat);
-    converter.convert();
+
+    ofstream outputFile = converter.convert();
 
   } catch (const exception &e) {
     cerr << "Error during conversion: " << e.what() << "\n";
     return 1;
   }
-    cout << "Conversion completed successfully.\n";
-    return 0;
+  cout << "Conversion completed successfully.\n";
+  return 0;
 }

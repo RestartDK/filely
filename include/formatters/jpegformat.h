@@ -2,6 +2,7 @@
 #define JPEGFORMAT_H
 
 #include "fileformat.h"
+#include <fstream>
 #include <string>
 
 class JPEGFormat : public FileFormat {
@@ -11,8 +12,7 @@ public:
 
   std::string parse(const std::ifstream &file) const override;
 
-  std::string format(const std::ofstream &file,
-                     const std::string data) const override;
+  std::string format(const std::string data) const override;
 };
 
 #endif
