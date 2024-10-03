@@ -11,7 +11,7 @@ string JPGFormat::parse(ifstream &file) const {
   return buffer.str();
 }
 
-string JPGFormat::format(const string &data) const {
+string JPGFormat::format(const string &data, const std::string &outputFilePath) const {
   // Process data here
   return "Formatted data: " + data;
 }

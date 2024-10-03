@@ -11,7 +11,7 @@ string PNGFormat::parse(ifstream &file) const {
   return buffer.str();
 }
 
-string PNGFormat::format(const string &data) const {
+string PNGFormat::format(const string &data, const std::string &outputFilePath) const {
   // Process data here
   return "Formatted data: " + data;
 }

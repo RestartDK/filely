@@ -3,21 +3,31 @@
 #include <algorithm>
 #include <vector>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
 CLIOptions parseArguments(int argc, char* argv[]) {
+    cout << "Starting to parse arguments..." << endl; // Debugging output
     CLIOptions options;
 
     if (argc < 2) {
+        cout << "Not enough arguments provided." << endl; // Debugging output
         options.showHelp = true;
         return options;
     }
 
-    static const vector<string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
+    // Initialize the validFormats vector without an initializer list
+    vector<string> validFormats;
+    validFormats.push_back("png");
+    validFormats.push_back("jpg");
+    validFormats.push_back("jpeg");
+    validFormats.push_back("csv");
+    validFormats.push_back("json");
 
     for (int i = 1; i < argc; ++i) {
         string arg = argv[i];
+        cout << "Processing argument: " << arg << endl; // Debugging output
         if (arg == "-h" || arg == "--help") {
             options.showHelp = true;
             return options;
@@ -25,10 +35,10 @@ CLIOptions parseArguments(int argc, char* argv[]) {
             if (i + 1 < argc) {
                 options.outputFormat = argv[++i];
                 transform(options.outputFormat.begin(), options.outputFormat.end(),
-                               options.outputFormat.begin(), ::tolower);
+                              options.outputFormat.begin(), ::tolower);
+                cout << "Output format detected: " << options.outputFormat << endl; // Debugging output
                 if (find(validFormats.begin(), validFormats.end(), options.outputFormat) == validFormats.end()) {
                     cerr << "Error: Unsupported output format '" << options.outputFormat << "'.\n";
-                    cerr << "Supported formats are: png, jpg, jpeg, csv, json.\n";
                     options.showHelp = true;
                     return options;
                 }
@@ -40,6 +50,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
         } else if (arg == "-p") {
             if (i + 1 < argc) {
                 options.outputPath = argv[++i];
+                cout << "Output path detected: " << options.outputPath << endl; // Debugging output
             } else {
                 cerr << "Error: No output path specified after '-p'.\n";
                 options.showHelp = true;
@@ -47,6 +58,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
             }
         } else if (arg[0] != '-') {
             options.inputFile = arg;
+            cout << "Input file detected: " << options.inputFile << endl; // Debugging output
         } else {
             cerr << "Error: Unknown option '" << arg << "'.\n";
             options.showHelp = true;
@@ -68,6 +80,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
     }
     file.close();
 
+    cout << "Arguments parsed successfully." << endl; // Debugging output
     return options;
 }
 

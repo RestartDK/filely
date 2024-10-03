@@ -2,6 +2,8 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <map>
 
 CSVFormat::~CSVFormat() {
     // Empty destructor
@@ -11,99 +13,72 @@ using namespace std;
 
 string CSVFormat::parse(ifstream &file) const
 {
-    vector<string> headers;
-    vector<vector<string>> rows;
-    string line;
+    cout << "Entering CSVFormat::parse" << endl;
 
-    // Read headers
-    if (getline(file, line))
-    {
-        stringstream ss(line);
-        string item;
-        while (getline(ss, item, ','))
-        {
-            headers.push_back(item);
-        }
-    }
+    // Read the entire CSV file content into a string
+    stringstream buffer;
+    buffer << file.rdbuf();
+    string csvData = buffer.str();
 
-    // Read data rows
-    while (getline(file, line))
-    {
-        stringstream ss(line);
-        string item;
-        vector<string> row;
-        while (getline(ss, item, ','))
-        {
-            row.push_back(item);
-        }
-        rows.push_back(row);
-    }
+    // Debugging print to show the CSV data
+    cout << "CSV data read from file:\n" << csvData << endl;
 
-    // Construct JSON string
-    stringstream json;
-    json << "[\n";
-    for (size_t i = 0; i < rows.size(); ++i)
-    {
-        json << "  {\n";
-        for (size_t j = 0; j < headers.size(); ++j)
-        {
-            json << "    \"" << headers[j] << "\": ";
-            if (j < rows[i].size())
-            {
-                json << "\"" << rows[i][j] << "\"";
-            }
-            else
-            {
-                json << "\"\"";
-            }
-            if (j < headers.size() - 1)
-            {
-                json << ",";
-            }
-            json << "\n";
-        }
-        json << "  }";
-        if (i < rows.size() - 1)
-        {
-            json << ",";
-        }
-        json << "\n";
-    }
-    json << "]";
-
-    return json.str();
+    return csvData;
 }
 
 
-string CSVFormat::format(const string &data) const
+string CSVFormat::format(const string &data, const std::string &outputFilePath) const
 {
+    // This method takes JSON data as input and converts it to CSV format
+
     // Parse the JSON data
     istringstream dataStream(data);
     string line;
     vector<string> headers;
     vector<vector<string>> rows;
     bool inObject = false;
-    vector<string> row;
+    map<string, string> keyValues;
 
-    // Open CSV file for writing
-    ofstream outputFile("/Users/paulruiz/Documents/GitHub/file-converter/output.csv");  // You can change the file name/path if needed
-
-    if (!outputFile.is_open()) {
-        return "Error: Unable to open output CSV file.";
-    }
+    cout << "Formatting JSON to CSV..." << endl;
+    cout << "Data before formatting:\n" << data << endl;
 
     while (getline(dataStream, line))
     {
+        // Remove leading and trailing whitespace
         line.erase(0, line.find_first_not_of(" \t\n\r"));
+        line.erase(line.find_last_not_of(" \t\n\r") + 1);
+
         if (line == "{" || line == "{\r")
         {
             inObject = true;
-            row.clear();
+            keyValues.clear();
         }
         else if (line == "}," || line == "}" || line == "},\r" || line == "}\r")
         {
             inObject = false;
-            rows.push_back(row);  // Add parsed row to rows vector
+            // Collect headers
+            for (const auto& kv : keyValues)
+            {
+                if (find(headers.begin(), headers.end(), kv.first) == headers.end())
+                {
+                    headers.push_back(kv.first);
+                }
+            }
+            // Collect values in order of headers
+            vector<string> row;
+            for (const auto& header : headers)
+            {
+                auto it = keyValues.find(header);
+                if (it != keyValues.end())
+                {
+                    row.push_back(it->second);
+                }
+                else
+                {
+                    row.push_back("");
+                }
+            }
+            rows.push_back(row);
         }
         else if (inObject)
         {
@@ -122,15 +97,16 @@ string CSVFormat::format(const string &data) const
                 value.erase(0, value.find_first_not_of(" \t\n\r\""));
                 value.erase(value.find_last_not_of(" \t\n\r\",") + 1);
 
-                // Add header if not already present
-                if (find(headers.begin(), headers.end(), key) == headers.end())
-                {
-                    headers.push_back(key);  // Store unique headers
-                }
-
-                row.push_back(value);  // Store value for the row
+                // Store key-value pair
+                keyValues[key] = value;
             }
         }
+    }
+
+    // Open CSV file for writing
+    ofstream outputFile(outputFilePath);
+    if (!outputFile.is_open()) {
+        return "Error: Unable to open output CSV file.";
     }
 
     // Write headers to CSV
@@ -145,12 +121,12 @@ string CSVFormat::format(const string &data) const
     outputFile << "\n";  // Newline after headers
 
     // Write rows to CSV
-    for (const auto &r : rows)
+    for (const auto &row : rows)
     {
-        for (size_t i = 0; i < r.size(); ++i)
+        for (size_t i = 0; i < row.size(); ++i)
         {
-            outputFile << r[i];
-            if (i < r.size() - 1)
+            outputFile << row[i];
+            if (i < row.size() - 1)
             {
                 outputFile << ",";
             }
@@ -161,5 +137,5 @@ string CSVFormat::format(const string &data) const
     // Close the CSV file
     outputFile.close();
 
-    return "CSV file created successfully: output.csv";
+    return "CSV file created successfully: " + outputFilePath;
 }

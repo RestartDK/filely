@@ -12,7 +12,7 @@ public:
 
   std::string parse(std::ifstream &file) const override;
 
-  std::string format(const std::string &data) const override;
+  std::string format(const std::string &data, const std::string &outputFilePath) const override;
 };
 
 #endif

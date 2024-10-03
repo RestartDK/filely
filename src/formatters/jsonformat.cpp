@@ -1,102 +1,43 @@
 #include "jsonformat.h"
 #include <sstream>
 #include <vector>
-#include <algorithm>
+#include <iostream>
+#include <fstream>
 
 
 JSONFormat::~JSONFormat() {
     // Empty destructor
 }
 
-
 using namespace std;
+
 
 string JSONFormat::parse(ifstream &file) const
 {
-    string line;
-    vector<string> headers;
-    vector<vector<string>> rows;
-    bool inObject = false;
-    vector<string> row;
+    cout << "Entering JSONFormat::parse" << endl;
 
-    while (getline(file, line))
-    {
-        line.erase(0, line.find_first_not_of(" \t\n\r"));
-        if (line == "{" || line == "{\r")
-        {
-            inObject = true;
-            row.clear();
-        }
-        else if (line == "}," || line == "}" || line == "},\r" || line == "}\r")
-        {
-            inObject = false;
-            rows.push_back(row);
-        }
-        else if (inObject)
-        {
-            // Parse key-value pair
-            size_t colonPos = line.find(":");
-            if (colonPos != string::npos)
-            {
-                string key = line.substr(0, colonPos);
-                string value = line.substr(colonPos + 1);
+    // Read the entire JSON file content into a string
+    stringstream buffer;
+    buffer << file.rdbuf();
+    string jsonData = buffer.str();
 
-                // Remove quotes and commas
-                key.erase(0, key.find_first_not_of(" \t\n\r\""));
-                key.erase(key.find_last_not_of(" \t\n\r\",") + 1);
+    // Debugging print to show the JSON data
+    cout << "JSON data read from file:\n" << jsonData << endl;
 
-                value.erase(0, value.find_first_not_of(" \t\n\r\""));
-                value.erase(value.find_last_not_of(" \t\n\r\",") + 1);
-
-                // Add header if not already present
-                if (find(headers.begin(), headers.end(), key) == headers.end())
-                {
-                    headers.push_back(key);
-                }
-
-                row.push_back(value);
-            }
-        }
-    }
-
-    // Construct CSV-formatted string
-    stringstream csv;
-
-    // Write headers
-    for (size_t i = 0; i < headers.size(); ++i)
-    {
-        csv << headers[i];
-        if (i < headers.size() - 1)
-        {
-            csv << ",";
-        }
-    }
-    csv << "\n";
-
-    // Write rows
-    for (const auto &r : rows)
-    {
-        for (size_t i = 0; i < r.size(); ++i)
-        {
-            csv << r[i];
-            if (i < r.size() - 1)
-            {
-                csv << ",";
-            }
-        }
-        csv << "\n";
-    }
-
-    return csv.str();
+    return jsonData;
 }
 
-string JSONFormat::format(const string &data) const
+
+string JSONFormat::format(const string &data, const std::string &outputFilePath) const
 {
     // Parse the CSV data
     istringstream dataStream(data);
     string line;
     vector<string> headers;
     vector<vector<string>> rows;
+
+    cout << "Formatting CSV to JSON..." << endl;  // Debugging print
+    cout << "Data before formatting:\n" << data << endl;  // Print the data received
 
     // Read headers (first line in the CSV)
     if (getline(dataStream, line))
@@ -105,8 +46,12 @@ string JSONFormat::format(const string &data) const
         string item;
         while (getline(ss, item, ','))
         {
-            headers.push_back(item);  // Storing the header columns
+            headers.push_back(item);  // Store the header columns
         }
+    }
+    else
+    {
+        return "Error: CSV data is empty or missing headers.";
     }
 
     // Read the rest of the data rows
@@ -117,41 +62,110 @@ string JSONFormat::format(const string &data) const
         vector<string> row;
         while (getline(ss, item, ','))
         {
-            row.push_back(item);  // Storing each row
+            row.push_back(item);  // Store each row
         }
+
+        // Ensure the row has the same number of columns as headers
+        if (row.size() != headers.size())
+        {
+            return "Error: Mismatch between number of headers and data columns.";
+        }
+
         rows.push_back(row);
     }
 
-    // Open a JSON file for writing
-    ofstream outputFile("output.json");  // You can change the file name as needed
+    // Open a JSON file for writing using outputFilePath
+    ofstream outputFile(outputFilePath);
 
-    if (!outputFile.is_open()) {
+    if (!outputFile.is_open())
+    {
         return "Error: Unable to open output JSON file.";
     }
 
     // Build the JSON output
     outputFile << "[\n";  // Start of the JSON array
+
     for (size_t i = 0; i < rows.size(); ++i)
     {
         outputFile << "  {\n";  // Start of the JSON object for a row
+
         for (size_t j = 0; j < headers.size(); ++j)
         {
-            outputFile << "    \"" << headers[j] << "\": \"" << rows[i][j] << "\"";
-            if (j < headers.size() - 1) {
+            // Trim whitespace from headers and values
+            string header = headers[j];
+            string value = rows[i][j];
+            header.erase(header.find_last_not_of(" \t\n\r") + 1);
+            header.erase(0, header.find_first_not_of(" \t\n\r"));
+            value.erase(value.find_last_not_of(" \t\n\r") + 1);
+            value.erase(0, value.find_first_not_of(" \t\n\r"));
+
+            // Escape special characters in header and value
+            header = escapeJSON(header);
+            value = escapeJSON(value);
+
+            outputFile << "    \"" << header << "\": \"" << value << "\"";
+
+            if (j < headers.size() - 1)
+            {
                 outputFile << ",";  // Add a comma between key-value pairs except the last one
             }
+
             outputFile << "\n";
         }
+
         outputFile << "  }";
-        if (i < rows.size() - 1) {
+
+        if (i < rows.size() - 1)
+        {
             outputFile << ",";  // Add a comma between objects except the last one
         }
+
         outputFile << "\n";
     }
+
     outputFile << "]";  // End of the JSON array
 
     // Close the JSON file
     outputFile.close();
 
-    return "JSON file created successfully: output.json";
+    return "JSON file created successfully: " + outputFilePath;
+}
+
+
+
+// Helper function to escape JSON strings
+string JSONFormat::escapeJSON(const string& input) const
+{
+    string output;
+    for (char c : input)
+    {
+        switch (c)
+        {
+            case '\"':
+                output += "\\\"";
+                break;
+            case '\\':
+                output += "\\\\";
+                break;
+            case '\b':
+                output += "\\b";
+                break;
+            case '\f':
+                output += "\\f";
+                break;
+            case '\n':
+                output += "\\n";
+                break;
+            case '\r':
+                output += "\\r";
+                break;
+            case '\t':
+                output += "\\t";
+                break;
+            default:
+                output += c;
+                break;
+        }
+    }
+    return output;
 }

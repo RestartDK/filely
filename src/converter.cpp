@@ -1,25 +1,29 @@
 #include "converter.h"
-#include "fileformat.h"
 #include <fstream>
 #include <iostream>
-using namespace std;
 
-Converter::Converter(string inputFilePath, string outputFilePath,
-                     FileFormat *inputFormat, FileFormat *outputFormat){};
+Converter::Converter(std::string inputFilePath, std::string outputFilePath, FileFormat* inputFormat, FileFormat* outputFormat)
+    : inputFilePath(inputFilePath), outputFilePath(outputFilePath), inputFormat(inputFormat), outputFormat(outputFormat) {}
 
-ofstream Converter::convert() {
-  // Read file parse it with a file format
-  ifstream inputFile(inputFilePath);
-  string data = inputFormat->parse(inputFile);
+void Converter::convert() {
+    // Open input file
+    std::ifstream inputFile(inputFilePath);
+    if (!inputFile.is_open()) {
+        throw std::runtime_error("Failed to open input file: " + inputFilePath);
+    }
 
-  // Error checking for null data
-  if (data.empty()) {
-    cerr << "Error: No data to convert" << endl;
-  }
+    // Parse the input file
+    std::cout << "Parsing input file: " << inputFilePath << std::endl;
+    std::string data = inputFormat->parse(inputFile);
+    inputFile.close();
 
-  // Now format the data and write it to a new file
-  string formattedData = outputFormat->format(data);
-  ofstream file(data);
+    // Print the parsed data for debugging purposes
+    std::cout << "Parsed data:\n" << data << std::endl;
 
-  return file;
+    // Format the data and write to output file
+    std::cout << "Formatting data and writing to output file: " << outputFilePath << std::endl;
+    std::string result = outputFormat->format(data, outputFilePath);
+    
+    // Print the result after formatting
+    std::cout << result << std::endl;
 }
