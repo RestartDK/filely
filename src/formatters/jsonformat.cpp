@@ -1,10 +1,16 @@
 #include "jsonformat.h"
 #include <sstream>
 #include <vector>
+#include <algorithm>
+
+
+JSONFormat::~JSONFormat() {
+    // Empty destructor
+}
+
 
 using namespace std;
 
-string JSONFormat::parse(ifstream &file) const
 string JSONFormat::parse(ifstream &file) const
 {
     string line;
@@ -84,7 +90,7 @@ string JSONFormat::parse(ifstream &file) const
     return csv.str();
 }
 
-string JSONFormat::format(ofstream &file, const string &data) const
+string JSONFormat::format(const string &data) const
 {
     // Parse the CSV data
     istringstream dataStream(data);
@@ -92,18 +98,18 @@ string JSONFormat::format(ofstream &file, const string &data) const
     vector<string> headers;
     vector<vector<string>> rows;
 
-    // Read headers
+    // Read headers (first line in the CSV)
     if (getline(dataStream, line))
     {
         stringstream ss(line);
         string item;
         while (getline(ss, item, ','))
         {
-            headers.push_back(item);
+            headers.push_back(item);  // Storing the header columns
         }
     }
 
-    // Read data rows
+    // Read the rest of the data rows
     while (getline(dataStream, line))
     {
         stringstream ss(line);
@@ -111,41 +117,41 @@ string JSONFormat::format(ofstream &file, const string &data) const
         vector<string> row;
         while (getline(ss, item, ','))
         {
-            row.push_back(item);
+            row.push_back(item);  // Storing each row
         }
         rows.push_back(row);
     }
 
-    // Write JSON to file
-    file << "[\n";
+    // Open a JSON file for writing
+    ofstream outputFile("output.json");  // You can change the file name as needed
+
+    if (!outputFile.is_open()) {
+        return "Error: Unable to open output JSON file.";
+    }
+
+    // Build the JSON output
+    outputFile << "[\n";  // Start of the JSON array
     for (size_t i = 0; i < rows.size(); ++i)
     {
-        file << "  {\n";
+        outputFile << "  {\n";  // Start of the JSON object for a row
         for (size_t j = 0; j < headers.size(); ++j)
         {
-            file << "    \"" << headers[j] << "\": ";
-            if (j < rows[i].size())
-            {
-                file << "\"" << rows[i][j] << "\"";
+            outputFile << "    \"" << headers[j] << "\": \"" << rows[i][j] << "\"";
+            if (j < headers.size() - 1) {
+                outputFile << ",";  // Add a comma between key-value pairs except the last one
             }
-            else
-            {
-                file << "\"\"";
-            }
-            if (j < headers.size() - 1)
-            {
-                file << ",";
-            }
-            file << "\n";
+            outputFile << "\n";
         }
-        file << "  }";
-        if (i < rows.size() - 1)
-        {
-            file << ",";
+        outputFile << "  }";
+        if (i < rows.size() - 1) {
+            outputFile << ",";  // Add a comma between objects except the last one
         }
-        file << "\n";
+        outputFile << "\n";
     }
-    file << "]";
+    outputFile << "]";  // End of the JSON array
 
-    return "Data written to JSON file.";
+    // Close the JSON file
+    outputFile.close();
+
+    return "JSON file created successfully: output.json";
 }

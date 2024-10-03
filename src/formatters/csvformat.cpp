@@ -1,6 +1,11 @@
 #include "csvformat.h"
 #include <sstream>
 #include <vector>
+#include <algorithm>
+
+CSVFormat::~CSVFormat() {
+    // Empty destructor
+}
 
 using namespace std;
 
@@ -69,6 +74,7 @@ string CSVFormat::parse(ifstream &file) const
     return json.str();
 }
 
+
 string CSVFormat::format(const string &data) const
 {
     // Parse the JSON data
@@ -78,6 +84,13 @@ string CSVFormat::format(const string &data) const
     vector<vector<string>> rows;
     bool inObject = false;
     vector<string> row;
+
+    // Open CSV file for writing
+    ofstream outputFile("/Users/paulruiz/Documents/GitHub/file-converter/output.csv");  // You can change the file name/path if needed
+
+    if (!outputFile.is_open()) {
+        return "Error: Unable to open output CSV file.";
+    }
 
     while (getline(dataStream, line))
     {
@@ -90,7 +103,7 @@ string CSVFormat::format(const string &data) const
         else if (line == "}," || line == "}" || line == "},\r" || line == "}\r")
         {
             inObject = false;
-            rows.push_back(row);
+            rows.push_back(row);  // Add parsed row to rows vector
         }
         else if (inObject)
         {
@@ -101,48 +114,52 @@ string CSVFormat::format(const string &data) const
                 string key = line.substr(0, colonPos);
                 string value = line.substr(colonPos + 1);
 
-                // Remove quotes and commas
+                // Remove quotes and commas from key
                 key.erase(0, key.find_first_not_of(" \t\n\r\""));
                 key.erase(key.find_last_not_of(" \t\n\r\",") + 1);
 
+                // Remove quotes and commas from value
                 value.erase(0, value.find_first_not_of(" \t\n\r\""));
                 value.erase(value.find_last_not_of(" \t\n\r\",") + 1);
 
                 // Add header if not already present
                 if (find(headers.begin(), headers.end(), key) == headers.end())
                 {
-                    headers.push_back(key);
+                    headers.push_back(key);  // Store unique headers
                 }
 
-                row.push_back(value);
+                row.push_back(value);  // Store value for the row
             }
         }
     }
 
-    // Write headers
+    // Write headers to CSV
     for (size_t i = 0; i < headers.size(); ++i)
     {
-        file << headers[i];
+        outputFile << headers[i];
         if (i < headers.size() - 1)
         {
-            file << ",";
+            outputFile << ",";
         }
     }
-    file << "\n";
+    outputFile << "\n";  // Newline after headers
 
-    // Write rows
+    // Write rows to CSV
     for (const auto &r : rows)
     {
         for (size_t i = 0; i < r.size(); ++i)
         {
-            file << r[i];
+            outputFile << r[i];
             if (i < r.size() - 1)
             {
-                file << ",";
+                outputFile << ",";
             }
         }
-        file << "\n";
+        outputFile << "\n";  // Newline after each row
     }
 
-    return "Data written to CSV file.";
+    // Close the CSV file
+    outputFile.close();
+
+    return "CSV file created successfully: output.csv";
 }

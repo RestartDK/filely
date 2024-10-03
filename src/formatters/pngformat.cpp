@@ -5,13 +5,13 @@ using namespace std;
 
 PNGFormat::~PNGFormat() = default;
 
-string PNGFormat::parse(const ifstream &file) const {
+string PNGFormat::parse(ifstream &file) const {
   stringstream buffer;
   buffer << file.rdbuf();
   return buffer.str();
 }
 
-string PNGFormat::format(const string data) const {
+string PNGFormat::format(const string &data) const {
   // Process data here
   return "Formatted data: " + data;
 }

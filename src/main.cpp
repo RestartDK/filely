@@ -13,6 +13,24 @@ using namespace std;
 // Add helper funtion to get file format object here!
 // TODO: This will be moved somewhere else as a helper function
 // or object method
+
+FileFormat* getFormatFromString(const std::string& format) {
+    if (format == "csv") {
+        return new CSVFormat();
+    } else if (format == "json") {
+        return new JSONFormat();
+    } else if (format == "png") {
+        return new PNGFormat();
+    } else if (format == "jpeg") {
+        return new JPEGFormat();
+    } else if (format == "jpg") {
+        return new JPGFormat();
+    }
+
+    std::cerr << "Unsupported output format: " << format << std::endl;
+    return nullptr;
+}
+
 string getFileExtension(const string &fileName) {
   size_t pos = fileName.find_last_of('.');
   if (pos != string::npos) {
@@ -40,30 +58,44 @@ FileFormat *getFileFormat(string path) {
   return nullptr;
 }
 
+
 int main(int argc, char *argv[]) {
-  CLIOptions options = parseArguments(argc, argv);
+    CLIOptions options = parseArguments(argc, argv);
 
-  if (options.showHelp) {
-    displayHelp();
-    return options.inputFile.empty() ? 1 : 0;
-  }
+    if (options.showHelp) {
+        displayHelp();
+        return options.inputFile.empty() ? 1 : 0;
+    }
 
-  cout << "Input File: " << options.inputFile << "\n";
-  cout << "Output Format: " << options.outputFormat << "\n";
-  cout << "Output Path: " << options.outputPath << "\n";
+    std::cout << "Input File: " << options.inputFile << "\n";
+    std::cout << "Output Format: " << options.outputFormat << "\n";
+    std::cout << "Output Path: " << options.outputPath << "\n";
 
-  try {
-    FileFormat *inputFormat = getFileFormat(options.inputFile);
-    FileFormat *outputFormat = getFileFormat(options.outputFormat);
-    Converter converter(options.inputFile, options.outputFormat, inputFormat,
-                        outputFormat);
+    try {
+        FileFormat *inputFormat = getFileFormat(options.inputFile);
+        if (!inputFormat) {
+            std::cerr << "Error: Unsupported input file format.\n";
+            return 1;
+        }
 
-    ofstream outputFile = converter.convert();
+        FileFormat *outputFormat = getFormatFromString(options.outputFormat);
+        if (!outputFormat) {
+            std::cerr << "Error: Unsupported output format.\n";
+            return 1;
+        }
 
-  } catch (const exception &e) {
-    cerr << "Error during conversion: " << e.what() << "\n";
-    return 1;
-  }
-  cout << "Conversion completed successfully.\n";
-  return 0;
+        Converter converter(options.inputFile, options.outputPath, inputFormat, outputFormat);
+
+        converter.convert();
+
+        // Clean up
+        delete inputFormat;
+        delete outputFormat;
+
+    } catch (const std::exception &e) {
+        std::cerr << "Error during conversion: " << e.what() << "\n";
+        return 1;
+    }
+    std::cout << "Conversion completed successfully.\n";
+    return 0;
 }
