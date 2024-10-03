@@ -69,7 +69,7 @@ string CSVFormat::parse(ifstream &file) const
     return json.str();
 }
 
-string CSVFormat::format(ofstream &file, const string &data) const
+string CSVFormat::format(const string &data) const
 {
     // Parse the JSON data
     istringstream dataStream(data);
