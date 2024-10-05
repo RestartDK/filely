@@ -12,7 +12,7 @@ JSONFormat::~JSONFormat() {
 using namespace std;
 
 
-string JSONFormat::parse(ifstream &file) const
+string JSONFormat::parseText(ifstream &file) const
 {
     cout << "Entering JSONFormat::parse" << endl;
 
@@ -28,7 +28,7 @@ string JSONFormat::parse(ifstream &file) const
 }
 
 
-string JSONFormat::format(const string &data, const std::string &outputFilePath) const
+string JSONFormat::formatText(const string &data, const std::string &outputFilePath) const
 {
     // Parse the CSV data
     istringstream dataStream(data);

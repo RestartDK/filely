@@ -11,7 +11,7 @@ CSVFormat::~CSVFormat() {
 
 using namespace std;
 
-string CSVFormat::parse(ifstream &file) const
+string CSVFormat::parseText(ifstream &file) const
 {
     cout << "Entering CSVFormat::parse" << endl;
 
@@ -27,7 +27,7 @@ string CSVFormat::parse(ifstream &file) const
 }
 
 
-string CSVFormat::format(const string &data, const std::string &outputFilePath) const
+string CSVFormat::formatText(const string &data, const std::string &outputFilePath) const
 {
     // This method takes JSON data as input and converts it to CSV format
 
