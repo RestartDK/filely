@@ -1,18 +1,21 @@
 #ifndef FILEFORMAT_H
 #define FILEFORMAT_H
 
-#include <fstream>
 #include <string>
+#include <vector>
+#include <fstream>
 
 class FileFormat {
 public:
     virtual ~FileFormat() {}
 
-    // Parse data from input file stream
-    virtual std::string parse(std::ifstream &file) const = 0;
+    // For formats that handle binary data (e.g., images)
+    virtual std::vector<uchar> parseBinary(std::ifstream &file) const { return {}; }
+    virtual std::string formatBinary(const std::vector<uchar> &data, const std::string &outputFilePath) const { return "Not implemented"; }
 
-    // Format data and write to output file path
-    virtual std::string format(const std::string &data, const std::string &outputFilePath) const = 0;
+    // For formats that handle text data (e.g., CSV, JSON)
+    virtual std::string parseText(std::ifstream &file) const { return ""; }
+    virtual std::string formatText(const std::string &data, const std::string &outputFilePath) const { return "Not implemented"; }
 };
 
 #endif
