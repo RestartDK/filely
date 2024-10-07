@@ -2,9 +2,6 @@
   <img src="images/filely.svg" height="96">
   <h3 align="center">Filely</h3>
 </p>
-
-<p align="center">Convert files, all from your terminal</p>
-
 <br/>
 
 # Architecture
