@@ -76,7 +76,7 @@ brew info opencv
 #### 4. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/file-converter.git
+git clone https://github.com/restartdk/file-converter.git
 cd file-converter
 ```
 
@@ -100,7 +100,7 @@ cd file-converter
 Open Command Prompt or PowerShell:
 
 ```bash
-git clone https://github.com/your-username/file-converter.git
+git clone https://github.com/restartdk/file-converter.git
 cd file-converter
 ```
 
@@ -210,9 +210,7 @@ file-converter/
 - **CMakeLists.txt**: Build configuration.
 - **README.md**: Project documentation.
 
-
 ---
-
 
 ## Troubleshooting
 
@@ -275,3 +273,4 @@ For any questions or issues, please open an issue on GitHub or contact [pruizall
 ---
 
 **Enjoy converting your files!**
+
