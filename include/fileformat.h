@@ -1,19 +1,39 @@
-#ifndef FILEFORMAT_H // Include guard to prevent multiple inclusions
+#ifndef FILEFORMAT_H
 #define FILEFORMAT_H
 
 #include <fstream>
+#include <opencv2/opencv.hpp>
+#include <stdexcept> // For exceptions
 #include <string>
+#include <vector>
 
 class FileFormat {
 public:
-  // Virtual destructor for proper cleanup in derived classes
   virtual ~FileFormat() {}
 
-  // Pure virtual method to parse data from a file stream (input file)
-  virtual std::string parse(const std::ifstream &file) const = 0;
+  // For formats that handle binary data (e.g., images)
+  virtual std::vector<uchar> parseBinary(std::ifstream &file) const {
+    throw std::runtime_error(
+        "Binary parsing not implemented for this file format.");
+  }
 
-  // Pure virtual method to format data into a file stream (output file)
-  virtual std::string format(const std::string data) const = 0;
+  virtual std::string formatBinary(const std::vector<uchar> &data,
+                                   const std::string &outputFilePath) const {
+    throw std::runtime_error(
+        "Binary formatting not implemented for this file format.");
+  }
+
+  // For formats that handle text data (e.g., CSV, JSON)
+  virtual std::string parseText(std::ifstream &file) const {
+    throw std::runtime_error(
+        "Text parsing not implemented for this file format.");
+  }
+
+  virtual std::string formatText(const std::string &data,
+                                 const std::string &outputFilePath) const {
+    throw std::runtime_error(
+        "Text formatting not implemented for this file format.");
+  }
 };
 
 #endif
