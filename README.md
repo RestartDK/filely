@@ -1,12 +1,11 @@
 <p align="center">
-  <img src="public/learnai.svg" height="96">
+  <img src="images/filely.svg" height="96">
   <h3 align="center">Filely</h3>
 </p>
 
-<p align="center">Spend more time learning, less time searching</p>
+<p align="center">Convert files, all from your terminal</p>
 
 <br/>
-# CLI File Converter in C++
 
 # Architecture
 
