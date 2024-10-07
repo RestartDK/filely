@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="public/learnai.svg" height="96">
+  <h3 align="center">Filely</h3>
+</p>
+
+<p align="center">Spend more time learning, less time searching</p>
+
+<br/>
 # CLI File Converter in C++
 
 # Architecture
@@ -263,14 +271,6 @@ In VSCode, update your `c_cpp_properties.json` file to include the correct path 
     "version": 4
 }
 ```
-
----
-
-## Contact
-
-For any questions or issues, please open an issue on GitHub or contact [pruizalliata.ieu2022@student.ie.edu](mailto:pruizalliata.ieu2022@student.ie.edu).
-
----
 
 **Enjoy converting your files!**
 
