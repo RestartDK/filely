@@ -5,13 +5,9 @@ using namespace std;
 
 JPEGFormat::~JPEGFormat() = default;
 
-string JPEGFormat::parse(ifstream &file) const {
-  stringstream buffer;
-  buffer << file.rdbuf();
-  return buffer.str();
-}
+vector<uchar> JPEGFormat::parseBinary(ifstream &file) const {}
 
-string JPEGFormat::format(const string &data, const std::string &outputFilePath) const {
+string JPEGFormat::formatBinary(const vector<uchar> &data,
+                                const std::string &outputFilePath) const {
   // Process data here
-  return "Formatted data: " + data;
 }

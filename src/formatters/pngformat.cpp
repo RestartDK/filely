@@ -5,13 +5,9 @@ using namespace std;
 
 PNGFormat::~PNGFormat() = default;
 
-string PNGFormat::parse(ifstream &file) const {
-  stringstream buffer;
-  buffer << file.rdbuf();
-  return buffer.str();
-}
+vector<uchar> PNGFormat::parseBinary(ifstream &file) const {}
 
-string PNGFormat::format(const string &data, const std::string &outputFilePath) const {
+string PNGFormat::formatBinary(const vector<uchar> &data,
+                               const std::string &outputFilePath) const {
   // Process data here
-  return "Formatted data: " + data;
 }
