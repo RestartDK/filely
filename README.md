@@ -22,6 +22,7 @@
 - [Building the Project](#building-the-project)
 - [Usage](#usage)
   - [Examples](#examples)
+- [Create a Symlink](#create-a-symlink)
 - [Project Structure](#project-structure)
 - [Troubleshooting](#troubleshooting)
 - [Contact](#contact)
