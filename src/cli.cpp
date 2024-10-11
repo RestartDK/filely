@@ -3,89 +3,119 @@
 #include <algorithm>
 #include <vector>
 #include <fstream>
-#include <string>
 
-using namespace std;
+#define DEBUG 1
+
+#if DEBUG
+#define DEBUG_PRINT(x) std::cout << x << std::endl;
+#else
+#define DEBUG_PRINT(x)
+#endif
 
 CLIOptions parseArguments(int argc, char* argv[]) {
-    cout << "Starting to parse arguments..." << endl; // Debugging output
     CLIOptions options;
 
     if (argc < 2) {
-        cout << "Not enough arguments provided." << endl; // Debugging output
+        DEBUG_PRINT("Not enough arguments provided.");
         options.showHelp = true;
+        options.errorMessage = "Error: No arguments provided.";
         return options;
     }
 
-    // Initialize the validFormats vector without an initializer list
-    vector<string> validFormats;
-    validFormats.push_back("png");
-    validFormats.push_back("jpg");
-    validFormats.push_back("jpeg");
-    validFormats.push_back("csv");
-    validFormats.push_back("json");
+    // List of valid output formats
+    std::vector<std::string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
 
     for (int i = 1; i < argc; ++i) {
-        string arg = argv[i];
-        cout << "Processing argument: " << arg << endl; // Debugging output
+        std::string arg = argv[i];
+
         if (arg == "-h" || arg == "--help") {
             options.showHelp = true;
             return options;
         } else if (arg == "-t") {
+            if (options.outputFormatProvided) {
+                options.showHelp = true;
+                options.errorMessage = "Error: Duplicate output format specified.";
+                return options;
+            }
             if (i + 1 < argc) {
                 options.outputFormat = argv[++i];
-                transform(options.outputFormat.begin(), options.outputFormat.end(),
-                              options.outputFormat.begin(), ::tolower);
-                cout << "Output format detected: " << options.outputFormat << endl; // Debugging output
-                if (find(validFormats.begin(), validFormats.end(), options.outputFormat) == validFormats.end()) {
-                    cerr << "Error: Unsupported output format '" << options.outputFormat << "'.\n";
+                options.outputFormatProvided = true;
+                std::transform(options.outputFormat.begin(), options.outputFormat.end(),
+                               options.outputFormat.begin(), ::tolower);
+                DEBUG_PRINT("Output format detected: " + options.outputFormat);
+                if (std::find(validFormats.begin(), validFormats.end(), options.outputFormat) == validFormats.end()) {
                     options.showHelp = true;
+                    options.errorMessage = "Error: Unsupported output format '" + options.outputFormat + "'.";
                     return options;
                 }
             } else {
-                cerr << "Error: No output format specified after '-t'.\n";
                 options.showHelp = true;
+                options.errorMessage = "Error: No output format specified after '-t'.";
                 return options;
             }
         } else if (arg == "-p") {
+            if (options.outputPathProvided) {
+                options.showHelp = true;
+                options.errorMessage = "Error: Duplicate output path specified.";
+                return options;
+            }
             if (i + 1 < argc) {
                 options.outputPath = argv[++i];
-                cout << "Output path detected: " << options.outputPath << endl; // Debugging output
+                options.outputPathProvided = true;
+                DEBUG_PRINT("Output path detected: " + options.outputPath);
             } else {
-                cerr << "Error: No output path specified after '-p'.\n";
                 options.showHelp = true;
+                options.errorMessage = "Error: No output path specified after '-p'.";
                 return options;
             }
         } else if (arg[0] != '-') {
+            if (options.inputFileProvided) {
+                options.showHelp = true;
+                options.errorMessage = "Error: Multiple input files specified.";
+                return options;
+            }
             options.inputFile = arg;
-            cout << "Input file detected: " << options.inputFile << endl; // Debugging output
+            options.inputFileProvided = true;
+            DEBUG_PRINT("Input file detected: " + options.inputFile);
         } else {
-            cerr << "Error: Unknown option '" << arg << "'.\n";
+            // Unknown option encountered
             options.showHelp = true;
+            options.errorMessage = "Error: Unknown option '" + arg + "'.";
             return options;
         }
     }
 
-    if (options.inputFile.empty()) {
-        cerr << "Error: No input file specified.\n";
+    // Validate required options
+    if (!options.inputFileProvided) {
         options.showHelp = true;
+        options.errorMessage = "Error: No input file specified.";
+        return options;
+    }
+    if (!options.outputFormatProvided) {
+        options.showHelp = true;
+        options.errorMessage = "Error: No output format specified.";
+        return options;
+    }
+    if (!options.outputPathProvided) {
+        options.showHelp = true;
+        options.errorMessage = "Error: No output path specified.";
         return options;
     }
 
-    ifstream file(options.inputFile);
+    // Validate input file existence
+    std::ifstream file(options.inputFile);
     if (!file.good()) {
-        cerr << "Error: Input file '" << options.inputFile << "' does not exist.\n";
         options.showHelp = true;
+        options.errorMessage = "Error: Input file '" + options.inputFile + "' does not exist.";
         return options;
     }
     file.close();
 
-    cout << "Arguments parsed successfully." << endl; // Debugging output
     return options;
 }
 
 void displayHelp() {
-    cout << "Usage: fc <input_file> -t <output_format> -p <output_path>\n"
+    std::cout << "Usage: file_converter <input_file> -t <output_format> -p <output_path>\n"
               << "Options:\n"
               << "  -t <format>     Specify the output format (png, jpg, jpeg, csv, json)\n"
               << "  -p <path>       Specify the output path\n"
