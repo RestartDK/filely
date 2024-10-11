@@ -5,12 +5,14 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 int main(int argc, char *argv[]) {
     CLIOptions options = parseArguments(argc, argv);
 
     if (options.showHelp) {
         if (!options.errorMessage.empty()) {
-            std::cerr << options.errorMessage << "\n";
+            cerr << options.errorMessage << "\n";
         }
         displayHelp();
         return options.inputFile.empty() ? 1 : 0;
@@ -23,18 +25,18 @@ int main(int argc, char *argv[]) {
     try {
         // Get input format based on input file path
         DEBUG_PRINT("Getting input format...");
-        std::unique_ptr<FileFormat> inputFormat(getFileFormat(options.inputFile));
+        unique_ptr<FileFormat> inputFormat(getFileFormat(options.inputFile));
         if (!inputFormat) {
-            std::cerr << "Error: Unsupported input file format.\n";
+            cerr << "Error: Unsupported input file format.\n";
             return 1;
         }
         DEBUG_PRINT("Input format successfully determined.");
 
         // Get output format based on format string
         DEBUG_PRINT("Getting output format...");
-        std::unique_ptr<FileFormat> outputFormat(getFormatFromString(options.outputFormat));
+        unique_ptr<FileFormat> outputFormat(getFormatFromString(options.outputFormat));
         if (!outputFormat) {
-            std::cerr << "Error: Unsupported output format.\n";
+            cerr << "Error: Unsupported output format.\n";
             return 1;
         }
         DEBUG_PRINT("Output format successfully determined.");
@@ -47,8 +49,8 @@ int main(int argc, char *argv[]) {
         converter.convert();
         DEBUG_PRINT("Conversion completed successfully.");
 
-    } catch (const std::exception &e) {
-        std::cerr << "Error during conversion: " << e.what() << "\n";
+    } catch (const exception &e) {
+        cerr << "Error during conversion: " << e.what() << "\n";
         return 1;
     }
 

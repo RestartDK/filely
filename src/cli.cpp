@@ -4,10 +4,12 @@
 #include <vector>
 #include <fstream>
 
+using namespace std;
+
 #define DEBUG 1
 
 #if DEBUG
-#define DEBUG_PRINT(x) std::cout << x << std::endl;
+#define DEBUG_PRINT(x) cout << x << endl;
 #else
 #define DEBUG_PRINT(x)
 #endif
@@ -23,10 +25,10 @@ CLIOptions parseArguments(int argc, char* argv[]) {
     }
 
     // List of valid output formats
-    std::vector<std::string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
+    vector<string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
 
     for (int i = 1; i < argc; ++i) {
-        std::string arg = argv[i];
+        string arg = argv[i];
 
         if (arg == "-h" || arg == "--help") {
             options.showHelp = true;
@@ -40,10 +42,10 @@ CLIOptions parseArguments(int argc, char* argv[]) {
             if (i + 1 < argc) {
                 options.outputFormat = argv[++i];
                 options.outputFormatProvided = true;
-                std::transform(options.outputFormat.begin(), options.outputFormat.end(),
+                transform(options.outputFormat.begin(), options.outputFormat.end(),
                                options.outputFormat.begin(), ::tolower);
                 DEBUG_PRINT("Output format detected: " + options.outputFormat);
-                if (std::find(validFormats.begin(), validFormats.end(), options.outputFormat) == validFormats.end()) {
+                if (find(validFormats.begin(), validFormats.end(), options.outputFormat) == validFormats.end()) {
                     options.showHelp = true;
                     options.errorMessage = "Error: Unsupported output format '" + options.outputFormat + "'.";
                     return options;
@@ -103,7 +105,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
     }
 
     // Validate input file existence
-    std::ifstream file(options.inputFile);
+    ifstream file(options.inputFile);
     if (!file.good()) {
         options.showHelp = true;
         options.errorMessage = "Error: Input file '" + options.inputFile + "' does not exist.";
@@ -115,7 +117,7 @@ CLIOptions parseArguments(int argc, char* argv[]) {
 }
 
 void displayHelp() {
-    std::cout << "Usage: file_converter <input_file> -t <output_format> -p <output_path>\n"
+    cout << "Usage: file_converter <input_file> -t <output_format> -p <output_path>\n"
               << "Options:\n"
               << "  -t <format>     Specify the output format (png, jpg, jpeg, csv, json)\n"
               << "  -p <path>       Specify the output path\n"

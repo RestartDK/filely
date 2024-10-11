@@ -6,10 +6,12 @@
 #include "formatters/jpegformat.h"
 #include "formatters/jpgformat.h"
 
-std::string getFileExtension(const std::string &fileName) {
+using namespace std;
+
+string getFileExtension(const string &fileName) {
     size_t pos = fileName.find_last_of('.');
-    if (pos != std::string::npos) {
-        std::string extension = fileName.substr(pos + 1);
+    if (pos != string::npos) {
+        string extension = fileName.substr(pos + 1);
         DEBUG_PRINT("getFileExtension: Extracted extension: " + extension);
         return extension;
     }
@@ -17,9 +19,9 @@ std::string getFileExtension(const std::string &fileName) {
     return "";
 }
 
-FileFormat* getFileFormat(const std::string &path) {
+FileFormat* getFileFormat(const string &path) {
     DEBUG_PRINT("getFileFormat: Determining file format for: " + path);
-    std::string fileType = getFileExtension(path);
+    string fileType = getFileExtension(path);
     DEBUG_PRINT("getFileFormat: File extension detected: " + fileType);
 
     if (fileType == "csv") {
@@ -39,11 +41,11 @@ FileFormat* getFileFormat(const std::string &path) {
         return new JPGFormat();
     }
 
-    std::cerr << "getFileFormat: Unsupported file format: " << fileType << std::endl;
+    cerr << "getFileFormat: Unsupported file format: " << fileType << endl;
     return nullptr;
 }
 
-FileFormat* getFormatFromString(const std::string& format) {
+FileFormat* getFormatFromString(const string& format) {
     DEBUG_PRINT("Determining output format for: " + format);
     if (format == "csv") {
         return new CSVFormat();
@@ -57,6 +59,6 @@ FileFormat* getFormatFromString(const std::string& format) {
         return new JPGFormat();
     }
 
-    std::cerr << "Unsupported output format: " << format << std::endl;
+    cerr << "Unsupported output format: " << format << endl;
     return nullptr;
 }
