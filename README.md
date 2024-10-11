@@ -185,7 +185,7 @@ The `file_converter` executable accepts input and output file paths, as well as 
 
 ## Create a Symlink
 
-1. **Create a symbolic link** to `file_converter` in a directory that's already in your `PATH` (e.g., `/usr/local/bin`) and give it a different name (e.g., `fconv`):
+1. **Create a symbolic link** to `file_converter` and give it a different name (e.g., `fconv`):
 
    ```bash
    sudo ln -s /path/to/your/file_converter /usr/local/bin/fconv
@@ -195,10 +195,16 @@ The `file_converter` executable accepts input and output file paths, as well as 
 
 ### Verifying the Setup
 
-To verify that the `file_converter` (or its symlink) is correctly added to your `PATH`, run:
+To verify that the `file_converter` (or its symlink) is working correctly, run:
 
 ```bash
 which fconv
+```
+
+Which should return:
+    
+```
+/usr/local/bin/fconv
 ```
 
 ---
