@@ -1,46 +1,46 @@
 #include "formatters/jpgformat.h"
 #include <iostream>
+using namespace std;
 
 JPGFormat::~JPGFormat() {
   // Destructor
 }
 
-std::vector<uchar> JPGFormat::parseBinary(std::ifstream &file) const {
-  std::cout << "Entering JPGFormat::parseBinary" << std::endl;
+vector<uchar> JPGFormat::parseBinary(ifstream &file) const {
+  cout << "Entering JPGFormat::parseBinary" << endl;
 
   // Read the entire file content into a vector
-  std::vector<uchar> buffer((std::istreambuf_iterator<char>(file)),
-                            std::istreambuf_iterator<char>());
+  vector<uchar> buffer((istreambuf_iterator<char>(file)),
+                       istreambuf_iterator<char>());
 
   // Decode the image to ensure it's valid
   cv::Mat image = cv::imdecode(buffer, cv::IMREAD_UNCHANGED);
   if (image.empty()) {
-    std::cerr << "Error: Failed to decode JPG image." << std::endl;
+    cerr << "Error: Failed to decode JPG image." << endl;
     return {};
   }
 
-  std::cout << "JPG image parsed successfully." << std::endl;
+  cout << "JPG image parsed successfully." << endl;
   return buffer;
 }
 
-std::string JPGFormat::formatBinary(const std::vector<uchar> &data,
-                                    const std::string &outputFilePath) const {
-  std::cout << "Entering JPGFormat::formatBinary" << std::endl;
+string JPGFormat::formatBinary(const vector<uchar> &data,
+                               const string &outputFilePath) const {
+  cout << "Entering JPGFormat::formatBinary" << endl;
 
   // Decode the image
   cv::Mat image = cv::imdecode(data, cv::IMREAD_UNCHANGED);
   if (image.empty()) {
-    std::cerr << "Error: Failed to decode image data for JPG format."
-              << std::endl;
+    cerr << "Error: Failed to decode image data for JPG format." << endl;
     return "Error: Failed to decode image data for JPG format.";
   }
 
   // Write the image to a JPG file
   if (!cv::imwrite(outputFilePath, image)) {
-    std::cerr << "Error: Failed to write JPG file." << std::endl;
+    cerr << "Error: Failed to write JPG file." << endl;
     return "Error: Failed to write JPG file.";
   }
 
-  std::cout << "JPG file created successfully: " << outputFilePath << std::endl;
+  cout << "JPG file created successfully: " << outputFilePath << endl;
   return "JPG file created successfully: " + outputFilePath;
 }

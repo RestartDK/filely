@@ -1,46 +1,44 @@
 #include "formatters/pngformat.h"
 #include <iostream>
+using namespace std;
 
-PNGFormat::~PNGFormat() {
-  // Destructor
-}
+PNGFormat::~PNGFormat() {}
 
-std::vector<uchar> PNGFormat::parseBinary(std::ifstream &file) const {
-  std::cout << "Entering PNGFormat::parseBinary" << std::endl;
+vector<uchar> PNGFormat::parseBinary(ifstream &file) const {
+  cout << "Entering PNGFormat::parseBinary" << endl;
 
   // Read the entire file content into a vector
-  std::vector<uchar> buffer((std::istreambuf_iterator<char>(file)),
-                            std::istreambuf_iterator<char>());
+  vector<uchar> buffer((istreambuf_iterator<char>(file)),
+                       istreambuf_iterator<char>());
 
   // Decode the image to ensure it's valid
   cv::Mat image = cv::imdecode(buffer, cv::IMREAD_UNCHANGED);
   if (image.empty()) {
-    std::cerr << "Error: Failed to decode PNG image." << std::endl;
+    cerr << "Error: Failed to decode PNG image." << endl;
     return {};
   }
 
-  std::cout << "PNG image parsed successfully." << std::endl;
+  cout << "PNG image parsed successfully." << endl;
   return buffer;
 }
 
-std::string PNGFormat::formatBinary(const std::vector<uchar> &data,
-                                    const std::string &outputFilePath) const {
-  std::cout << "Entering PNGFormat::formatBinary" << std::endl;
+string PNGFormat::formatBinary(const vector<uchar> &data,
+                               const string &outputFilePath) const {
+  cout << "Entering PNGFormat::formatBinary" << endl;
 
   // Decode the image
   cv::Mat image = cv::imdecode(data, cv::IMREAD_UNCHANGED);
   if (image.empty()) {
-    std::cerr << "Error: Failed to decode image data for PNG format."
-              << std::endl;
+    cerr << "Error: Failed to decode image data for PNG format." << endl;
     return "Error: Failed to decode image data for PNG format.";
   }
 
   // Write the image to a PNG file
   if (!cv::imwrite(outputFilePath, image)) {
-    std::cerr << "Error: Failed to write PNG file." << std::endl;
+    cerr << "Error: Failed to write PNG file." << endl;
     return "Error: Failed to write PNG file.";
   }
 
-  std::cout << "PNG file created successfully: " << outputFilePath << std::endl;
+  cout << "PNG file created successfully: " << outputFilePath << endl;
   return "PNG file created successfully: " + outputFilePath;
 }
