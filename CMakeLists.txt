@@ -28,6 +28,7 @@ include_directories(src)
 set(CONVERTER_SOURCES
         src/converter.cpp
         src/cli.cpp
+        src/utils.cpp
         src/formatters/jpegformat.cpp
         src/formatters/jpgformat.cpp
         src/formatters/pngformat.cpp

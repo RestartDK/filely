@@ -1,7 +1,11 @@
 #include <gtest/gtest.h>
 #include "cli.h"
+#include "utils.h"
+#include "formatters/jpegformat.h"
+#include "formatters/pngformat.h"
 #include <fstream>
 #include <cstdio>
+#include <memory>
 
 const char* PATH = "input.svg";
 
@@ -37,11 +41,28 @@ TEST(CLIArgumentTest, ValidArguments) {
     std::ofstream outfile(PATH);
     outfile.close();
 
+    // Parse arguments
     CLIOptions options = parseArguments(argc, argv);
     EXPECT_FALSE(options.showHelp);
     EXPECT_EQ(options.inputFile, PATH);
     EXPECT_EQ(options.outputFormat, "jpeg");
     EXPECT_EQ(options.outputPath, "output.jpeg");
+
+    // Verify getFormatFromString functionality
+    std::unique_ptr<FileFormat> outputFormat(getFormatFromString(options.outputFormat));
+    ASSERT_NE(outputFormat, nullptr) << "Unsupported output file format.";
+
+    // Check that the outputFormat is of the expected type
+    if (options.outputFormat == "jpeg") {
+        ASSERT_NE(dynamic_cast<JPEGFormat*>(outputFormat.get()), nullptr) << "Expected JPEGFormat.";
+    } else if (options.outputFormat == "png") {
+        ASSERT_NE(dynamic_cast<PNGFormat*>(outputFormat.get()), nullptr) << "Expected PNGFormat.";
+    }
+
+    // Verify output file path extension
+    std::string expectedExtension = options.outputFormat;
+    std::string actualExtension = getFileExtension(options.outputPath);
+    EXPECT_EQ(actualExtension, expectedExtension) << "Output file extension does not match desired output format.";
 
     // Clean up
     std::remove(PATH);
