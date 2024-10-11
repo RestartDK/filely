@@ -30,7 +30,7 @@
 
 ## Introduction
 
-The **File Converter** is a C++ application that allows users to convert files between different formats. It supports both text-based formats (like CSV and JSON) and binary image formats (like PNG and JPEG). The application is designed following Object-Oriented Programming (OOP) principles and uses OpenCV for image processing.
+The **File Converter** is a C++ application that allows users to fconv files between different formats. It supports both text-based formats (like CSV and JSON) and binary image formats (like PNG and JPEG). The application is designed following Object-Oriented Programming (OOP) principles and uses OpenCV for image processing.
 
 ---
 
@@ -179,6 +179,26 @@ The `file_converter` executable accepts input and output file paths, as well as 
 
 ```bash
 ./file_converter data.json -t csv -p data.csv
+```
+
+---
+
+## Create a Symlink
+
+1. **Create a symbolic link** to `file_converter` in a directory that's already in your `PATH` (e.g., `/usr/local/bin`) and give it a different name (e.g., `fconv`):
+
+    ```bash
+    sudo ln -s /path/to/your/file_converter /usr/local/bin/fconv
+    ```
+
+2. Now you can call `file_converter` using the `fconv` command from any directory.
+
+### Verifying the Setup
+
+To verify that the `file_converter` (or its symlink) is correctly added to your `PATH`, run:
+
+```bash
+which fconv
 ```
 
 ---
