@@ -6,10 +6,10 @@
 #include <iostream>
 using namespace std;
 
-Converter::Converter(string inputFilePath, string outputFilePath,
-                     FileFormat *inputFormat, FileFormat *outputFormat)
-    : inputFilePath(inputFilePath), outputFilePath(outputFilePath),
-      inputFormat(inputFormat), outputFormat(outputFormat) {}
+using namespace std;
+
+Converter::Converter(string inputFilePath, string outputFilePath, FileFormat* inputFormat, FileFormat* outputFormat)
+    : inputFilePath(inputFilePath), outputFilePath(outputFilePath), inputFormat(inputFormat), outputFormat(outputFormat) {}
 
 void Converter::convert() {
   // Determine if the input and output formats handle binary data

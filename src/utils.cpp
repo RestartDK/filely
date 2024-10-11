@@ -7,21 +7,23 @@
 #include <iostream>
 using namespace std;
 
+using namespace std;
+
 string getFileExtension(const string &fileName) {
-  size_t pos = fileName.find_last_of('.');
-  if (pos != string::npos) {
-    string extension = fileName.substr(pos + 1);
-    DEBUG_PRINT("getFileExtension: Extracted extension: " + extension);
-    return extension;
-  }
-  DEBUG_PRINT("getFileExtension: No extension found!");
-  return "";
+    size_t pos = fileName.find_last_of('.');
+    if (pos != string::npos) {
+        string extension = fileName.substr(pos + 1);
+        DEBUG_PRINT("getFileExtension: Extracted extension: " + extension);
+        return extension;
+    }
+    DEBUG_PRINT("getFileExtension: No extension found!");
+    return "";
 }
 
-FileFormat *getFileFormat(const string &path) {
-  DEBUG_PRINT("getFileFormat: Determining file format for: " + path);
-  string fileType = getFileExtension(path);
-  DEBUG_PRINT("getFileFormat: File extension detected: " + fileType);
+FileFormat* getFileFormat(const string &path) {
+    DEBUG_PRINT("getFileFormat: Determining file format for: " + path);
+    string fileType = getFileExtension(path);
+    DEBUG_PRINT("getFileFormat: File extension detected: " + fileType);
 
   if (fileType == "csv") {
     DEBUG_PRINT("getFileFormat: Returning CSVFormat object");
@@ -40,24 +42,24 @@ FileFormat *getFileFormat(const string &path) {
     return new JPGFormat();
   }
 
-  cerr << "getFileFormat: Unsupported file format: " << fileType << endl;
-  return nullptr;
+    cerr << "getFileFormat: Unsupported file format: " << fileType << endl;
+    return nullptr;
 }
 
-FileFormat *getFormatFromString(const string &format) {
-  DEBUG_PRINT("Determining output format for: " + format);
-  if (format == "csv") {
-    return new CSVFormat();
-  } else if (format == "json") {
-    return new JSONFormat();
-  } else if (format == "png") {
-    return new PNGFormat();
-  } else if (format == "jpeg") {
-    return new JPEGFormat();
-  } else if (format == "jpg") {
-    return new JPGFormat();
-  }
+FileFormat* getFormatFromString(const string& format) {
+    DEBUG_PRINT("Determining output format for: " + format);
+    if (format == "csv") {
+        return new CSVFormat();
+    } else if (format == "json") {
+        return new JSONFormat();
+    } else if (format == "png") {
+        return new PNGFormat();
+    } else if (format == "jpeg") {
+        return new JPEGFormat();
+    } else if (format == "jpg") {
+        return new JPGFormat();
+    }
 
-  cerr << "Unsupported output format: " << format << endl;
-  return nullptr;
+    cerr << "Unsupported output format: " << format << endl;
+    return nullptr;
 }
