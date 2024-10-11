@@ -1,63 +1,63 @@
 #include "cli.h"
 #include "converter.h"
 #include "fileformat.h"
+#include <iostream>
+#include <string>
 #include "formatters/csvformat.h"
 #include "formatters/jpegformat.h"
 #include "formatters/jpgformat.h"
 #include "formatters/jsonformat.h"
 #include "formatters/pngformat.h"
-#include <iostream>
-#include <string>
-using namespace std;
 
-// Add helper funtion to get file format object here!
-// TODO: This will be moved somewhere else as a helper function
-// or object method
+// Debugging macro
+#define DEBUG 1
 
-string getFileExtension(const string &fileName) {
+#if DEBUG
+#define DEBUG_PRINT(x) std::cout << x << std::endl;
+#else
+#define DEBUG_PRINT(x)
+#endif
+
+// Helper functions remain in main.cpp
+std::string getFileExtension(const std::string &fileName) {
     size_t pos = fileName.find_last_of('.');
-    if (pos != string::npos) {
-        string extension = fileName.substr(pos + 1);
-        cout << "getFileExtension: Extracted extension: " << extension << endl; // Debugging output
+    if (pos != std::string::npos) {
+        std::string extension = fileName.substr(pos + 1);
+        DEBUG_PRINT("getFileExtension: Extracted extension: " + extension);
         return extension;
     }
-    cout << "getFileExtension: No extension found!" << endl; // Debugging output
+    DEBUG_PRINT("getFileExtension: No extension found!");
     return "";
 }
 
-
-// Function to get FileFormat based on file path
-FileFormat *getFileFormat(string path) {
-    cout << "getFileFormat: Determining file format for: " << path << endl; // Debugging output
-
-    string fileType = getFileExtension(path);
-    cout << "getFileFormat: File extension detected: " << fileType << endl; // Debugging output
+FileFormat* getFileFormat(const std::string &path) {
+    DEBUG_PRINT("getFileFormat: Determining file format for: " + path);
+    std::string fileType = getFileExtension(path);
+    DEBUG_PRINT("getFileFormat: File extension detected: " + fileType);
 
     if (fileType == "csv") {
-        cout << "getFileFormat: Returning CSVFormat object" << endl; // Debugging output
+        DEBUG_PRINT("getFileFormat: Returning CSVFormat object");
         return new CSVFormat();
     } else if (fileType == "json") {
-        cout << "getFileFormat: Returning JSONFormat object" << endl; // Debugging output
+        DEBUG_PRINT("getFileFormat: Returning JSONFormat object");
         return new JSONFormat();
     } else if (fileType == "png") {
-        cout << "getFileFormat: Returning PNGFormat object" << endl; // Debugging output
+        DEBUG_PRINT("getFileFormat: Returning PNGFormat object");
         return new PNGFormat();
     } else if (fileType == "jpeg") {
-        cout << "getFileFormat: Returning JPEGFormat object" << endl; // Debugging output
+        DEBUG_PRINT("getFileFormat: Returning JPEGFormat object");
         return new JPEGFormat();
     } else if (fileType == "jpg") {
-        cout << "getFileFormat: Returning JPGFormat object" << endl; // Debugging output
+        DEBUG_PRINT("getFileFormat: Returning JPGFormat object");
         return new JPGFormat();
     }
 
-    cerr << "getFileFormat: Unsupported file format: " << fileType << endl; // Debugging output
+    std::cerr << "getFileFormat: Unsupported file format: " << fileType << std::endl;
     return nullptr;
 }
 
-
-// Function to get FileFormat based on format string
 FileFormat* getFormatFromString(const std::string& format) {
-    cout << "Determining output format for: " << format << endl; // Debugging output
+    DEBUG_PRINT("Determining output format for: " + format);
     if (format == "csv") {
         return new CSVFormat();
     } else if (format == "json") {
@@ -75,55 +75,52 @@ FileFormat* getFormatFromString(const std::string& format) {
 }
 
 int main(int argc, char *argv[]) {
-    cout << "Program started!" << endl; // Debugging output
     CLIOptions options = parseArguments(argc, argv);
 
     if (options.showHelp) {
-        cout << "Displaying help..." << endl;
+        if (!options.errorMessage.empty()) {
+            std::cerr << options.errorMessage << "\n";
+        }
         displayHelp();
         return options.inputFile.empty() ? 1 : 0;
     }
 
-    cout << "Input File: " << options.inputFile << "\n";
-    cout << "Output Format: " << options.outputFormat << "\n";
-    cout << "Output Path: " << options.outputPath << "\n";
+    DEBUG_PRINT("Input File: " + options.inputFile);
+    DEBUG_PRINT("Output Format: " + options.outputFormat);
+    DEBUG_PRINT("Output Path: " + options.outputPath);
 
     try {
         // Get input format based on input file path
-        cout << "Getting input format..." << endl;
-        FileFormat *inputFormat = getFileFormat(options.inputFile);
+        DEBUG_PRINT("Getting input format...");
+        std::unique_ptr<FileFormat> inputFormat(getFileFormat(options.inputFile));
         if (!inputFormat) {
-            cerr << "Error: Unsupported input file format.\n";
+            std::cerr << "Error: Unsupported input file format.\n";
             return 1;
         }
-        cout << "Input format successfully determined." << endl;
+        DEBUG_PRINT("Input format successfully determined.");
 
         // Get output format based on format string
-        cout << "Getting output format..." << endl;
-        FileFormat *outputFormat = getFormatFromString(options.outputFormat);
+        DEBUG_PRINT("Getting output format...");
+        std::unique_ptr<FileFormat> outputFormat(getFormatFromString(options.outputFormat));
         if (!outputFormat) {
-            cerr << "Error: Unsupported output format.\n";
+            std::cerr << "Error: Unsupported output format.\n";
             return 1;
         }
-        cout << "Output format successfully determined." << endl;
+        DEBUG_PRINT("Output format successfully determined.");
 
         // Create Converter and perform conversion
-        cout << "Creating converter object..." << endl;
-        Converter converter(options.inputFile, options.outputPath, inputFormat, outputFormat);
+        DEBUG_PRINT("Creating converter object...");
+        Converter converter(options.inputFile, options.outputPath, inputFormat.get(), outputFormat.get());
 
-        cout << "Starting conversion process..." << endl;
+        DEBUG_PRINT("Starting conversion process...");
         converter.convert();
-        cout << "Conversion completed successfully." << endl;
+        DEBUG_PRINT("Conversion completed successfully.");
 
-        // Clean up
-        delete inputFormat;
-        delete outputFormat;
-
-    } catch (const exception &e) {
-        cerr << "Error during conversion: " << e.what() << "\n";
+    } catch (const std::exception &e) {
+        std::cerr << "Error during conversion: " << e.what() << "\n";
         return 1;
     }
 
-    cout << "Program completed successfully." << endl;
+    DEBUG_PRINT("Program completed successfully.");
     return 0;
 }

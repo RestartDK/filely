@@ -1,5 +1,5 @@
 # Set the newest version CMAKE for the project to be built for
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.14)
 
 # Set the project name
 project(file_converter)
@@ -11,30 +11,43 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Ensure CMake creates compile_commands.json for development tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Find OpenCV package (it will search for OpenCV config file)
+# Find OpenCV package
 find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
 
-# Add executable target which will be the main.cpp and all required sources
-add_executable(file_converter
-    src/main.cpp
-    src/converter.cpp
-    src/cli.cpp
-    src/formatters/jpegformat.cpp
-    src/formatters/jpgformat.cpp
-    src/formatters/pngformat.cpp
-    src/formatters/csvformat.cpp
-    src/formatters/jsonformat.cpp
+# Find Google Test
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+# Include directories for your headers
+include_directories(include)
+include_directories(include/formatters)
+include_directories(src)
+
+# Source files for the converter library
+set(CONVERTER_SOURCES
+        src/converter.cpp
+        src/cli.cpp
+        src/formatters/jpegformat.cpp
+        src/formatters/jpgformat.cpp
+        src/formatters/pngformat.cpp
+        src/formatters/csvformat.cpp
+        src/formatters/jsonformat.cpp
 )
 
-# Specify where to look for header files (include directories)
-target_include_directories(file_converter PUBLIC
-    "${PROJECT_SOURCE_DIR}/include"
-    "${PROJECT_SOURCE_DIR}/include/formatters"
-    ${OpenCV_INCLUDE_DIRS} # Include OpenCV headers
-)
+# Create a static library for the converter code
+add_library(converter_lib STATIC ${CONVERTER_SOURCES})
 
-# Link the OpenCV libraries to the file_converter target
-target_link_libraries(file_converter ${OpenCV_LIBS})
+# Link OpenCV libraries to converter_lib
+target_link_libraries(converter_lib ${OpenCV_LIBS})
+
+# Add executable target for the main application
+add_executable(file_converter src/main.cpp)
+target_link_libraries(file_converter converter_lib)
+
+# Add test executable
+add_executable(runTests test/test_cli.cpp)
+target_link_libraries(runTests converter_lib ${GTEST_LIBRARIES} pthread)
 
 # Set output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
