@@ -7,7 +7,7 @@
 
 # Architecture
 
-![File Converter UML Diagram](./images/prog-diagram.svg)
+![File Converter UML Diagram](./images/prog-diagram-new.svg)
 
 # File Converter Project
 
@@ -187,9 +187,9 @@ The `file_converter` executable accepts input and output file paths, as well as 
 
 1. **Create a symbolic link** to `file_converter` in a directory that's already in your `PATH` (e.g., `/usr/local/bin`) and give it a different name (e.g., `fconv`):
 
-    ```bash
-    sudo ln -s /path/to/your/file_converter /usr/local/bin/fconv
-    ```
+   ```bash
+   sudo ln -s /path/to/your/file_converter /usr/local/bin/fconv
+   ```
 
 2. Now you can call `file_converter` using the `fconv` command from any directory.
 
@@ -290,4 +290,3 @@ In VSCode, update your `c_cpp_properties.json` file to include the correct path 
 ```
 
 **Enjoy converting your files!**
-
