@@ -42,6 +42,10 @@ add_library(converter_lib STATIC ${CONVERTER_SOURCES})
 # Link OpenCV libraries to converter_lib
 target_link_libraries(converter_lib ${OpenCV_LIBS})
 
+if(WIN32)
+    add_definitions(-DPLATFORM_WINDOWS)
+endif()
+
 # Add executable target for the main application
 add_executable(file_converter src/main.cpp)
 target_link_libraries(file_converter converter_lib)
