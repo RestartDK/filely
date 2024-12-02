@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.14)
 # Set the project name
 project(file_converter)
 
-# Set the C++ standard to 14 for the project
-set(CMAKE_CXX_STANDARD 14)
+# Set the C++ standard to 17 for the project
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Ensure CMake creates compile_commands.json for development tools
@@ -23,6 +23,15 @@ include_directories(${GTEST_INCLUDE_DIRS})
 include_directories(include)
 include_directories(include/formatters)
 include_directories(src)
+
+# Conditionally include third party libraries depending on path
+if(APPLE)
+    # macOS
+    include_directories(/opt/homebrew/include)
+elseif(UNIX)
+    # Linux
+    include_directories(/usr/local/include)
+endif()
 
 # Source files for the converter library
 set(CONVERTER_SOURCES
@@ -45,6 +54,10 @@ target_link_libraries(converter_lib ${OpenCV_LIBS})
 # Add executable target for the main application
 add_executable(file_converter src/main.cpp)
 target_link_libraries(file_converter converter_lib)
+
+# Add executable target for the api application
+add_executable(api_service api/api_main.cpp api/api_handler.cpp)
+target_link_libraries(api_service converter_lib)
 
 # Add test executable
 add_executable(runTests test/test_cli.cpp)
