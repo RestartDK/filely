@@ -25,7 +25,7 @@
 #endif
 
 // Function to set console text color using conditional compilation
-void setConsoleColor(int colorCode) {
+inline void setConsoleColor(int colorCode) {
 #ifdef PLATFORM_WINDOWS
     // Windows console color handling
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -37,7 +37,7 @@ void setConsoleColor(int colorCode) {
 }
 
 // Function to reset console text color
-void resetConsoleColor() {
+inline void resetConsoleColor() {
 #ifdef PLATFORM_WINDOWS
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 #else
@@ -46,7 +46,7 @@ void resetConsoleColor() {
 }
 
 // Function to clear the screen
-void clearScreen() {
+inline void clearScreen() {
 #ifdef PLATFORM_WINDOWS
     system("cls");
 #else
