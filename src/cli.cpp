@@ -117,17 +117,16 @@ void displayBanner() {
 ------------------------------------------------
 )";
 
-    // Clear screen before animation
     clearScreen();
 
     // Typing Animation
-    setConsoleColor(33); // Yellow
+    setConsoleColor(33); 
     typingAnimation("Welcome to...", 100);
     resetConsoleColor();
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
     // Expanding Animation
-    setConsoleColor(36); // Cyan
+    setConsoleColor(36); 
     expandingAnimation(banner, 100);
     resetConsoleColor();
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -135,7 +134,7 @@ void displayBanner() {
     // Pulsing Animation
     pulsingAnimation(banner + slogan, 2, 300);
 
-    // Final display of banner and slogan
+
     clearScreen();
 #ifdef PLATFORM_WINDOWS
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -159,7 +158,7 @@ void displayProgressBar(int progress, int total) {
     float ratio = progress / (float)total;
     int pos = barWidth * ratio;
 
-    setConsoleColor(34); // Blue color
+    setConsoleColor(34); 
     std::cout << "[";
     for (int i = 0; i < barWidth; ++i) {
         if (i < pos)
@@ -186,6 +185,7 @@ CLIOptions parseArguments(int argc, char *argv[]) {
 
         std::string input;
         std::cout << "Welcome to the interactive file converter!\n\n";
+        std::cout << "\nCSV<->JSON\n\nPNG<->JPEG<->JPG\n\nBMP<->TXT\n\n";
 
         // Step 1: Input File
         setConsoleColor(36); // Cyan color
@@ -210,7 +210,7 @@ CLIOptions parseArguments(int argc, char *argv[]) {
         setConsoleColor(36); // Cyan color
         std::cout << "\nStep 2: Choose the output format\n";
         resetConsoleColor();
-        std::vector<std::string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
+        std::vector<std::string> validFormats = {"png", "jpg", "jpeg", "csv", "json", "bmp", "txt"};
 
         // Display valid options
         for (size_t i = 0; i < validFormats.size(); ++i) {
@@ -277,7 +277,7 @@ CLIOptions parseArguments(int argc, char *argv[]) {
 
     // Existing command-line argument parsing code
     // List of valid output formats
-    std::vector<std::string> validFormats = {"png", "jpg", "jpeg", "csv", "json"};
+    std::vector<std::string> validFormats = {"png", "jpg", "jpeg", "csv", "json", "bmp", "txt"};
 
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
