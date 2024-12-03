@@ -15,4 +15,4 @@ public:
   std::string formatText(const std::string &data, const std::string &outputFilePath) const override;
 };
 
-#endif
+#endif 
