@@ -1,0 +1,41 @@
+# Ignore build artifacts
+build/
+*.o
+*.out
+*.exe
+*.a
+*.so
+*.log
+*.tmp
+
+# Ignore local configurations
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.user
+*.workspace
+*.project
+
+# Ignore version control metadata
+.git/
+.gitignore
+
+# Ignore Docker-related files that aren't needed inside the image
+Dockerfile
+.dockerignore
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.old
+*.~*
+
+# Ignore files in the data directory (if you don't want to include uploaded files in the image)
+data/*
+!data/.gitkeep
