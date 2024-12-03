@@ -11,166 +11,177 @@
 using namespace std;
 
 void Converter::convert() {
-    // Determine if the input and output formats handle binary data
-    bool inputIsBinary = false;
-    bool outputIsBinary = false;
+    try {
+        // Determine if the input and output formats handle binary data
+        bool inputIsBinary = false;
+        bool outputIsBinary = false;
 
-    // Check if input format is binary (images)
-    if (dynamic_cast<PNGFormat *>(inputFormat) != nullptr ||
-        dynamic_cast<JPGFormat *>(inputFormat) != nullptr ||
-        dynamic_cast<JPEGFormat *>(inputFormat) != nullptr ||
-        dynamic_cast<BMPFormat *>(inputFormat) != nullptr) { // Added BMPFormat
-        inputIsBinary = true;
-    }
-
-    // Check if output format is binary (images)
-    if (dynamic_cast<PNGFormat *>(outputFormat) != nullptr ||
-        dynamic_cast<JPGFormat *>(outputFormat) != nullptr ||
-        dynamic_cast<JPEGFormat *>(outputFormat) != nullptr ||
-        dynamic_cast<BMPFormat *>(outputFormat) != nullptr) { // Added BMPFormat
-        outputIsBinary = true;
-    }
-
-    // Open input file with appropriate mode
-    ifstream inputFile;
-    if (inputIsBinary) {
-        inputFile.open(inputFilePath, ios::binary);
-    } else {
-        inputFile.open(inputFilePath);
-    }
-
-    if (!inputFile.is_open()) {
-        throw runtime_error("Failed to open input file: " + inputFilePath);
-    }
-
-    // Parse the input file
-    cout << "Parsing input file: " << inputFilePath << endl;
-
-    if (inputIsBinary) {
-        // Parse binary data
-        vector<uchar> data = inputFormat->parseBinary(inputFile);
-        inputFile.close();
-
-        if (data.empty()) {
-            throw runtime_error("Failed to parse binary input file.");
+        // Check if input format is binary (images)
+        if (dynamic_cast<PNGFormat *>(inputFormat) != nullptr ||
+            dynamic_cast<JPGFormat *>(inputFormat) != nullptr ||
+            dynamic_cast<JPEGFormat *>(inputFormat) != nullptr ||
+            dynamic_cast<BMPFormat *>(inputFormat) != nullptr) {
+            inputIsBinary = true;
         }
 
-        // Print the parsed data size for debugging
-        cout << "Parsed binary data size: " << data.size() << " bytes" << endl;
+        // Check if output format is binary (images)
+        if (dynamic_cast<PNGFormat *>(outputFormat) != nullptr ||
+            dynamic_cast<JPGFormat *>(outputFormat) != nullptr ||
+            dynamic_cast<JPEGFormat *>(outputFormat) != nullptr ||
+            dynamic_cast<BMPFormat *>(outputFormat) != nullptr) {
+            outputIsBinary = true;
+        }
 
-        if (outputIsBinary) {
-            // Format binary data to binary output
-            cout << "Formatting binary data to binary output file: " << outputFilePath << endl;
-            string result = outputFormat->formatBinary(data, outputFilePath);
-            cout << result << endl;
+        // Open input file with appropriate mode
+        ifstream inputFile;
+        if (inputIsBinary) {
+            inputFile.open(inputFilePath, ios::binary);
         } else {
-            // Conversion from binary to text
-            cout << "Formatting binary data to text output file: " << outputFilePath << endl;
+            inputFile.open(inputFilePath);
+        }
 
-            // Decode the image data
-            cv::Mat image = cv::imdecode(data, cv::IMREAD_UNCHANGED);
-            if (image.empty()) {
-                cerr << "Error: Failed to decode image data." << endl;
-                throw runtime_error("Failed to decode image data.");
+        if (!inputFile.is_open()) {
+            throw runtime_error("Error: Unable to open input file: " + inputFilePath);
+        }
+
+        cout << "Parsing input file: " << inputFilePath << endl;
+
+        if (inputIsBinary) {
+            // Parse binary data
+            vector<uchar> data;
+            try {
+                data = inputFormat->parseBinary(inputFile);
+            } catch (const exception &e) {
+                throw runtime_error("Error while parsing binary input file: " + string(e.what()));
+            }
+            inputFile.close();
+
+            if (data.empty()) {
+                throw runtime_error("Error: Parsed binary input file is empty.");
             }
 
-            // Convert image data to text representation
-            ostringstream oss;
-            // Write image dimensions and channels
-            oss << image.rows << " " << image.cols << " " << image.channels() << "\n";
+            cout << "Parsed binary data size: " << data.size() << " bytes" << endl;
 
-            // Write pixel data
-            for (int i = 0; i < image.rows; ++i) {
-                for (int j = 0; j < image.cols; ++j) {
-                    if (image.channels() == 1) {
-                        uchar pixel = image.at<uchar>(i, j);
-                        oss << static_cast<int>(pixel) << " ";
-                    } else {
-                        cv::Vec3b pixel = image.at<cv::Vec3b>(i, j);
-                        oss << static_cast<int>(pixel[2]) << " "  // R
-                            << static_cast<int>(pixel[1]) << " "  // G
-                            << static_cast<int>(pixel[0]) << " "; // B
-                    }
+            if (outputIsBinary) {
+                // Format binary data to binary output
+                cout << "Formatting binary data to binary output file: " << outputFilePath << endl;
+                try {
+                    string result = outputFormat->formatBinary(data, outputFilePath);
+                    cout << result << endl;
+                } catch (const exception &e) {
+                    throw runtime_error("Error while formatting binary data: " + string(e.what()));
                 }
-                oss << "\n";
-            }
-
-            // Get the text data
-            string textData = oss.str();
-
-            // Use output format's formatText method
-            string result = outputFormat->formatText(textData, outputFilePath);
-            cout << result << endl;
-        }
-    } else {
-        // Parse text data
-        string data = inputFormat->parseText(inputFile);
-        inputFile.close();
-
-        if (data.empty()) {
-            throw runtime_error("Failed to parse text input file.");
-        }
-
-        // Print the parsed data size for debugging
-        cout << "Parsed text data size: " << data.size() << " characters" << endl;
-
-        if (outputIsBinary) {
-            // Conversion from text to binary
-            cout << "Formatting text data to binary output file: " << outputFilePath << endl;
-
-            // Reconstruct image from text data
-            istringstream iss(data);
-            int rows, cols, channels;
-            if (!(iss >> rows >> cols >> channels)) {
-                cerr << "Error: Invalid image dimensions in text data." << endl;
-                throw runtime_error("Invalid image dimensions in text data.");
-            }
-
-            cv::Mat image;
-            if (channels == 1) {
-                image = cv::Mat(rows, cols, CV_8UC1);
             } else {
-                image = cv::Mat(rows, cols, CV_8UC3);
-            }
+                // Conversion from binary to text
+                cout << "Formatting binary data to text output file: " << outputFilePath << endl;
+                cv::Mat image = cv::imdecode(data, cv::IMREAD_UNCHANGED);
+                if (image.empty()) {
+                    throw runtime_error("Error: Failed to decode image data.");
+                }
 
-            // Read pixel data
-            for (int i = 0; i < rows; ++i) {
-                for (int j = 0; j < cols; ++j) {
-                    if (channels == 1) {
-                        int pixelValue;
-                        if (!(iss >> pixelValue)) {
-                            cerr << "Error: Not enough pixel data in text." << endl;
-                            throw runtime_error("Not enough pixel data in text.");
+                ostringstream oss;
+                oss << image.rows << " " << image.cols << " " << image.channels() << "\n";
+
+                for (int i = 0; i < image.rows; ++i) {
+                    for (int j = 0; j < image.cols; ++j) {
+                        if (image.channels() == 1) {
+                            oss << static_cast<int>(image.at<uchar>(i, j)) << " ";
+                        } else {
+                            cv::Vec3b pixel = image.at<cv::Vec3b>(i, j);
+                            oss << static_cast<int>(pixel[2]) << " "  // R
+                                << static_cast<int>(pixel[1]) << " "  // G
+                                << static_cast<int>(pixel[0]) << " "; // B
                         }
-                        image.at<uchar>(i, j) = static_cast<uchar>(pixelValue);
-                    } else {
-                        int r, g, b;
-                        if (!(iss >> r >> g >> b)) {
-                            cerr << "Error: Not enough pixel data in text." << endl;
-                            throw runtime_error("Not enough pixel data in text.");
-                        }
-                        image.at<cv::Vec3b>(i, j) = cv::Vec3b(static_cast<uchar>(b),
-                                                              static_cast<uchar>(g),
-                                                              static_cast<uchar>(r));
                     }
+                    oss << "\n";
+                }
+
+                string textData = oss.str();
+                try {
+                    string result = outputFormat->formatText(textData, outputFilePath);
+                    cout << result << endl;
+                } catch (const exception &e) {
+                    throw runtime_error("Error while formatting text data: " + string(e.what()));
                 }
             }
+        } else {
+            // Parse text data
+            string data;
+            try {
+                data = inputFormat->parseText(inputFile);
+            } catch (const exception &e) {
+                throw runtime_error("Error while parsing text input file: " + string(e.what()));
+            }
+            inputFile.close();
 
-            // Encode the image to binary data
-            vector<uchar> encodedData;
-            if (!cv::imencode(".bmp", image, encodedData)) {
-                cerr << "Error: Failed to encode image to BMP format." << endl;
-                throw runtime_error("Failed to encode image to BMP format.");
+            if (data.empty()) {
+                throw runtime_error("Error: Parsed text input file is empty.");
             }
 
-            // Use output format's formatBinary method
-            string result = outputFormat->formatBinary(encodedData, outputFilePath);
-            cout << result << endl;
-        } else {
-            // Format text data to text output
-            cout << "Formatting text data to text output file: " << outputFilePath << endl;
-            string result = outputFormat->formatText(data, outputFilePath);
-            cout << result << endl;
+            cout << "Parsed text data size: " << data.size() << " characters" << endl;
+
+            if (outputIsBinary) {
+                // Conversion from text to binary
+                cout << "Formatting text data to binary output file: " << outputFilePath << endl;
+
+                istringstream iss(data);
+                int rows, cols, channels;
+                if (!(iss >> rows >> cols >> channels)) {
+                    throw runtime_error("Error: Invalid image dimensions in text data.");
+                }
+
+                cv::Mat image;
+                if (channels == 1) {
+                    image = cv::Mat(rows, cols, CV_8UC1);
+                } else {
+                    image = cv::Mat(rows, cols, CV_8UC3);
+                }
+
+                for (int i = 0; i < rows; ++i) {
+                    for (int j = 0; j < cols; ++j) {
+                        if (channels == 1) {
+                            int pixelValue;
+                            if (!(iss >> pixelValue)) {
+                                throw runtime_error("Error: Insufficient pixel data in text.");
+                            }
+                            image.at<uchar>(i, j) = static_cast<uchar>(pixelValue);
+                        } else {
+                            int r, g, b;
+                            if (!(iss >> r >> g >> b)) {
+                                throw runtime_error("Error: Insufficient pixel data in text.");
+                            }
+                            image.at<cv::Vec3b>(i, j) = cv::Vec3b(static_cast<uchar>(b),
+                                                                  static_cast<uchar>(g),
+                                                                  static_cast<uchar>(r));
+                        }
+                    }
+                }
+
+                vector<uchar> encodedData;
+                if (!cv::imencode(".bmp", image, encodedData)) {
+                    throw runtime_error("Error: Failed to encode image to BMP format.");
+                }
+
+                try {
+                    string result = outputFormat->formatBinary(encodedData, outputFilePath);
+                    cout << result << endl;
+                } catch (const exception &e) {
+                    throw runtime_error("Error while formatting binary data: " + string(e.what()));
+                }
+            } else {
+                // Format text data to text output
+                cout << "Formatting text data to text output file: " << outputFilePath << endl;
+                try {
+                    string result = outputFormat->formatText(data, outputFilePath);
+                    cout << result << endl;
+                } catch (const exception &e) {
+                    throw runtime_error("Error while formatting text data: " + string(e.what()));
+                }
+            }
         }
+    } catch (const exception &e) {
+        cerr << e.what() << endl;
+    } catch (...) {
+        cerr << "An unexpected error occurred during conversion." << endl;
     }
 }
