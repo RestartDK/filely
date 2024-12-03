@@ -22,6 +22,9 @@
 - [Building the Project](#building-the-project)
 - [Usage](#usage)
   - [Examples](#examples)
+- [API Usage](#api-usage)
+  - [Running the API Server](#running-the-api-server)
+  - [API Endpoints](#api-endpoints)
 - [Create a Symlink](#create-a-symlink)
 - [Project Structure](#project-structure)
 - [Troubleshooting](#troubleshooting)
@@ -33,8 +36,6 @@
 
 The **File Converter** is a C++ application that allows users to fconv files between different formats. It supports both text-based formats (like CSV and JSON) and binary image formats (like PNG and JPEG). The application is designed following Object-Oriented Programming (OOP) principles and uses OpenCV for image processing.
 
----
-
 ## Features
 
 - **Convert between image formats**: PNG, JPG, and JPEG.
@@ -42,8 +43,7 @@ The **File Converter** is a C++ application that allows users to fconv files bet
 - **Extensible architecture**: Easily add support for more formats.
 - **Command-line interface**: Simple to use via terminal commands.
 - **Cross-platform support**: Works on macOS and Windows.
-
----
+- **REST API**: Convert files through HTTP endpoints.
 
 ## Prerequisites
 
@@ -52,15 +52,11 @@ The **File Converter** is a C++ application that allows users to fconv files bet
 - **OpenCV**: Version 4.x (for image processing).
 - **Git**: For cloning the repository (optional).
 
----
-
 ## Installation
 
 ### macOS
 
 #### 1. Install Homebrew (if not already installed)
-
-Open Terminal and run:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -103,20 +99,14 @@ cd file-converter
 
 #### 4. Clone the Repository
 
-Open Command Prompt or PowerShell:
-
 ```bash
 git clone https://github.com/restartdk/file-converter.git
 cd file-converter
 ```
 
----
-
 ## Building the Project
 
 ### Create Build Directory
-
-From the root directory of the project:
 
 ```bash
 mkdir build
@@ -139,8 +129,6 @@ make
 
 - Use `cmake .. -G "MinGW Makefiles"` if using MinGW.
 - Replace `make` with `mingw32-make` or `nmake` depending on your setup.
-
----
 
 ## Usage
 
@@ -182,15 +170,126 @@ The `file_converter` executable accepts input and output file paths, as well as 
 ./file_converter data.json -t csv -p data.csv
 ```
 
----
+## API Usage
+
+The File Converter also provides a REST API for file conversion. The API runs on port 18080 by default.
+
+### Running the API Server
+
+Using Docker:
+
+```bash
+# Build the Docker image
+docker build -t file-converter .
+
+# Run the container
+docker run -p 18080:18080 -d --name file-converter-api file-converter
+```
+
+### API Endpoints
+
+#### Check Server Status
+
+```http
+GET /status
+```
+
+Returns the server status.
+
+**Response**:
+
+```
+Filely API is running
+```
+
+#### Convert Files
+
+```http
+POST /convert
+```
+
+Converts a file to the specified format and returns the converted file directly.
+
+**Parameters**:
+
+- `file`: The file to convert (multipart/form-data)
+- `type`: The desired output format (query parameter)
+
+**Supported formats**:
+
+- Image formats: `png`, `jpg`, `jpeg`
+- Data formats: `csv`, `json`
+
+**Example using curl**:
+
+```bash
+# Convert PNG to JPEG
+curl -X POST "http://localhost:18080/convert?type=jpeg" \
+     -F "file=@/path/to/your/image.png" \
+     --output converted.jpeg
+
+# Convert CSV to JSON
+curl -X POST "http://localhost:18080/convert?type=json" \
+     -F "file=@/path/to/your/data.csv" \
+     --output converted.json
+```
+
+**Example using Python**:
+
+```python
+import requests
+
+# Convert PNG to JPEG
+files = {'file': open('image.png', 'rb')}
+response = requests.post('http://localhost:18080/convert?type=jpeg', files=files)
+
+with open('converted.jpeg', 'wb') as f:
+    f.write(response.content)
+
+# Convert CSV to JSON
+files = {'file': open('data.csv', 'rb')}
+response = requests.post('http://localhost:18080/convert?type=json', files=files)
+
+with open('converted.json', 'wb') as f:
+    f.write(response.content)
+```
+
+**Example using JavaScript**:
+
+```javascript
+// Convert PNG to JPEG
+const formData = new FormData();
+formData.append("file", fileInput.files[0]);
+
+fetch("http://localhost:18080/convert?type=jpeg", {
+  method: "POST",
+  body: formData,
+})
+  .then((response) => response.blob())
+  .then((blob) => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "converted.jpeg";
+    a.click();
+  });
+```
+
+### Error Responses
+
+The API returns appropriate HTTP status codes and error messages:
+
+- `400 Bad Request`: Missing file or invalid format
+- `404 Not Found`: File not found
+- `500 Internal Server Error`: Server-side error during conversion
 
 ## Create a Symlink
 
 1. **Create a symbolic link** to `file_converter` and give it a different name (e.g., `fconv`):
 
-   ```bash
-   sudo ln -s /path/to/your/file_converter /usr/local/bin/fconv
-   ```
+```bash
+sudo ln -s /path/to/your/file_converter /usr/local/bin/fconv
+```
 
 2. Now you can call `file_converter` using the `fconv` command from any directory.
 
@@ -203,16 +302,14 @@ which fconv
 ```
 
 Which should return:
-    
+
 ```
 /usr/local/bin/fconv
 ```
 
----
-
 ## Project Structure
 
-```css
+```
 file-converter/
 ├── include/
 │   ├── converter.h
@@ -242,8 +339,6 @@ file-converter/
 - **CMakeLists.txt**: Build configuration.
 - **README.md**: Project documentation.
 
----
-
 ## Troubleshooting
 
 ### Common Issues
@@ -252,7 +347,7 @@ file-converter/
 
 If you encounter errors like:
 
-```go
+```
 fatal error: 'opencv2/opencv.hpp' file not found
 ```
 
