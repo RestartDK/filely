@@ -43,6 +43,8 @@ set(CONVERTER_SOURCES
         src/formatters/pngformat.cpp
         src/formatters/csvformat.cpp
         src/formatters/jsonformat.cpp
+        src/formatters/bmpformat.cpp
+        src/formatters/textformat.cpp
 )
 
 # Create a static library for the converter code
@@ -50,6 +52,10 @@ add_library(converter_lib STATIC ${CONVERTER_SOURCES})
 
 # Link OpenCV libraries to converter_lib
 target_link_libraries(converter_lib ${OpenCV_LIBS})
+
+if(WIN32)
+    add_definitions(-DPLATFORM_WINDOWS)
+endif()
 
 # Add executable target for the main application
 add_executable(file_converter src/main.cpp)
