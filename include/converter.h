@@ -23,7 +23,7 @@ public:
         }
     }
 
-    void convert(); // Perform the conversion
+    void convert();
 };
 
 #endif

@@ -11,7 +11,7 @@ class FileFormat {
 public:
   virtual ~FileFormat() {}
 
-  // For formats that handle binary data (e.g., images)
+  // For formats that handle binary data (e.g., images, BMP)
   virtual std::vector<uchar> parseBinary(std::ifstream &file) const {
     throw std::runtime_error(
         "Binary parsing not implemented for this file format.");
@@ -23,7 +23,7 @@ public:
         "Binary formatting not implemented for this file format.");
   }
 
-  // For formats that handle text data (e.g., CSV, JSON)
+  // For formats that handle text data (e.g., CSV, JSON, TXT)
   virtual std::string parseText(std::ifstream &file) const {
     throw std::runtime_error(
         "Text parsing not implemented for this file format.");

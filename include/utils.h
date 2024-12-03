@@ -18,4 +18,4 @@ std::string getFileExtension(const std::string &fileName);
 FileFormat* getFileFormat(const std::string &path);
 FileFormat* getFormatFromString(const std::string& format);
 
-#endif // UTILS_H
+#endif 

@@ -36,7 +36,7 @@ inline void setConsoleColor(int colorCode) {
 #endif
 }
 
-// Function to reset console text color
+
 inline void resetConsoleColor() {
 #ifdef PLATFORM_WINDOWS
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
@@ -45,7 +45,7 @@ inline void resetConsoleColor() {
 #endif
 }
 
-// Function to clear the screen
+
 inline void clearScreen() {
 #ifdef PLATFORM_WINDOWS
     system("cls");
@@ -64,7 +64,7 @@ void typingAnimation(const std::string &text, int delayMs = 50) {
     std::cout << std::endl;
 }
 
-// Expanding animation
+// Expanding animation pretty cool
 void expandingAnimation(const std::string &art, int delayMs = 100) {
     std::istringstream stream(art);
     std::string line;
@@ -119,35 +119,32 @@ void displayBanner() {
 
     clearScreen();
 
-    // Typing Animation
     setConsoleColor(33); 
     typingAnimation("Welcome to...", 100);
     resetConsoleColor();
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-    // Expanding Animation
     setConsoleColor(36); 
     expandingAnimation(banner, 100);
     resetConsoleColor();
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
-    // Pulsing Animation
     pulsingAnimation(banner + slogan, 2, 300);
 
 
     clearScreen();
 #ifdef PLATFORM_WINDOWS
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, 11); // Cyan color
+    SetConsoleTextAttribute(hConsole, 11);
 #else
-    std::cout << "\033[36m"; // Cyan
+    std::cout << "\033[36m"; 
 #endif
     std::cout << banner << std::endl;
 
 #ifdef PLATFORM_WINDOWS
-    SetConsoleTextAttribute(hConsole, 14); // Yellow color
+    SetConsoleTextAttribute(hConsole, 14); 
 #else
-    std::cout << "\033[33m"; // Yellow
+    std::cout << "\033[33m"; 
 #endif
     std::cout << slogan << std::endl;
     resetConsoleColor();
@@ -217,9 +214,8 @@ CLIOptions parseArguments(int argc, char *argv[]) {
             std::cout << i + 1 << ". " << validFormats[i] << "\n";
         }
 
-        // Initialize variables
         int choice = 0;
-        bool isFirstAttempt = true; // Flag to differentiate first input attempt
+        bool isFirstAttempt = true; 
 
         // Loop until a valid choice is made
         do {
@@ -242,7 +238,6 @@ CLIOptions parseArguments(int argc, char *argv[]) {
             }
         } while (true);
 
-        // Assign the valid choice
         options.outputFormat = validFormats[choice - 1];
         options.outputFormatProvided = true;
         // Clear input buffer
