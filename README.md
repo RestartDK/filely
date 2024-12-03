@@ -51,6 +51,7 @@ The **File Converter** is a C++ application that allows users to fconv files bet
 - **CMake**: Version 3.10 or higher.
 - **OpenCV**: Version 4.x (for image processing).
 - **Git**: For cloning the repository (optional).
+- **[Crow](https://crowcpp.org/master/)**: Web framework for REST API in cpp.
 
 ## Installation
 
