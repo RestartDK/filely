@@ -43,6 +43,8 @@ set(CONVERTER_SOURCES
         src/formatters/pngformat.cpp
         src/formatters/csvformat.cpp
         src/formatters/jsonformat.cpp
+        src/formatters/bmpformat.cpp
+        src/formatters/textformat.cpp
 )
 
 # Create a static library for the converter code
