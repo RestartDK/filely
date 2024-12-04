@@ -51,7 +51,7 @@ void Converter::convert() {
             vector<uchar> data;
             try {
                 data = inputFormat->parseBinary(inputFile);
-            } catch (const exception &e) {
+            } catch (const BinaryParsingException &e) {
                 throw runtime_error("Error while parsing binary input file: " + string(e.what()));
             }
             inputFile.close();
@@ -68,7 +68,7 @@ void Converter::convert() {
                 try {
                     string result = outputFormat->formatBinary(data, outputFilePath);
                     cout << result << endl;
-                } catch (const exception &e) {
+                } catch (const BinaryFormattingException &e) {
                     throw runtime_error("Error while formatting binary data: " + string(e.what()));
                 }
             } else {
@@ -100,7 +100,7 @@ void Converter::convert() {
                 try {
                     string result = outputFormat->formatText(textData, outputFilePath);
                     cout << result << endl;
-                } catch (const exception &e) {
+                } catch (const TextFormattingException &e) {
                     throw runtime_error("Error while formatting text data: " + string(e.what()));
                 }
             }
@@ -109,7 +109,7 @@ void Converter::convert() {
             string data;
             try {
                 data = inputFormat->parseText(inputFile);
-            } catch (const exception &e) {
+            } catch (const TextParsingException &e) {
                 throw runtime_error("Error while parsing text input file: " + string(e.what()));
             }
             inputFile.close();
@@ -165,7 +165,7 @@ void Converter::convert() {
                 try {
                     string result = outputFormat->formatBinary(encodedData, outputFilePath);
                     cout << result << endl;
-                } catch (const exception &e) {
+                } catch (const BinaryFormattingException &e) {
                     throw runtime_error("Error while formatting binary data: " + string(e.what()));
                 }
             } else {
@@ -174,7 +174,7 @@ void Converter::convert() {
                 try {
                     string result = outputFormat->formatText(data, outputFilePath);
                     cout << result << endl;
-                } catch (const exception &e) {
+                } catch (const TextFormattingException &e) {
                     throw runtime_error("Error while formatting text data: " + string(e.what()));
                 }
             }

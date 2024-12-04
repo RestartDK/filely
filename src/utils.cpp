@@ -7,6 +7,7 @@
 #include "formatters/bmpformat.h"     // Added for BMP support
 #include "formatters/textformat.h"    // Added for Text support
 #include <iostream>
+#include <exception>  // Include for the custom exception
 using namespace std;
 
 string getFileExtension(const string &fileName) {
@@ -39,7 +40,7 @@ FileFormat* getFileFormat(const string &path) {
         return new JPEGFormat();
     } else if (fileType == "jpg") {
         DEBUG_PRINT("getFileFormat: Returning JPGFormat object");
-    return new JPGFormat();
+        return new JPGFormat();
     } else if (fileType == "bmp") {
         DEBUG_PRINT("getFileFormat: Returning BMPFormat object");
         return new BMPFormat(); // Added for BMP
@@ -48,8 +49,7 @@ FileFormat* getFileFormat(const string &path) {
         return new TextFormat(); // Added for Text
     }
 
-    cerr << "getFileFormat: Unsupported file format: " << fileType << endl;
-    return nullptr;
+    throw FileFormatException("Unsupported file format: " + fileType);
 }
 
 FileFormat* getFormatFromString(const string& format) {
@@ -70,6 +70,5 @@ FileFormat* getFormatFromString(const string& format) {
         return new TextFormat(); // Added for Text
     }
 
-    cerr << "Unsupported output format: " << format << endl;
-    return nullptr;
+    throw FileFormatException("Unsupported output format: " + format);
 }

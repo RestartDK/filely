@@ -33,28 +33,29 @@ int main(int argc, char *argv[]) {
 
     // Get output format based on format string
     DEBUG_PRINT("Getting output format...");
-    unique_ptr<FileFormat> outputFormat(
-        getFormatFromString(options.outputFormat));
+    unique_ptr<FileFormat> outputFormat(getFormatFromString(options.outputFormat));
     if (!outputFormat) {
       cerr << "Error: Unsupported output format.\n";
       return 1;
     }
     DEBUG_PRINT("Output format successfully determined.");
-
-    // Create Converter and perform conversion
-    DEBUG_PRINT("Creating converter object...");
-    Converter converter(options.inputFile, options.outputPath,
-                        inputFormat.get(), outputFormat.get());
-
+    
     DEBUG_PRINT("Starting conversion process...");
+    // Perform conversion
+    Converter converter(options.inputFile, options.outputPath, inputFormat.get(), outputFormat.get());
     converter.convert();
-    DEBUG_PRINT("Conversion completed successfully.");
+    DEBUG_PRINT("Conversion process completed successfully.");
 
+  } catch (const FileFormatException &e) {
+    cerr << "File format error: " << e.what() << "\n";
+    return 1;
   } catch (const exception &e) {
-    cerr << "Error during conversion: " << e.what() << "\n";
+    cerr << "Error: " << e.what() << "\n";
+    return 1;
+  } catch (...) {
+    cerr << "An unexpected error occurred.\n";
     return 1;
   }
 
-  DEBUG_PRINT("Program completed successfully.");
   return 0;
 }
